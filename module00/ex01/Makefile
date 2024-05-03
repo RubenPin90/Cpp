@@ -5,18 +5,21 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2023/12/27 21:33:35 by rpinchas          #+#    #+#              #
-#    Updated: 2023/12/27 21:33:36 by rpinchas         ###   ########.fr        #
+#    Created: 2024/04/30 12:37:50 by rpinchas          #+#    #+#              #
+#    Updated: 2024/05/02 16:41:53 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = phonebook
-CC = c++ -g
-FLAGS = -Wall -Wextra -Werror -std=c++98
+NAME := PhoneBook
 
-SRC = phonebook.cpp
-OBJ_F = obj/
-OBJ = $(addprefix $(OBJ_F), $(SRC:%.cpp=%.o))
+COMP := c++ -g
+FLAGS := -Wall -Werror -Wextra -std=c++98
+
+SRC := PhoneBook.class.cpp \
+		Contact.class.cpp \
+		main.cpp
+OBJ_DIR := ./obj
+OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 
 # colors
 GREEN		='\033[32m'
@@ -29,18 +32,16 @@ RESET		='\033[0m'
 
 all: $(NAME)
 
-$(NAME): $(OBJ_F) $(OBJ)
-	@$(CC) $(FLAGS) -o $@ $(OBJ)
-	@echo $(GREEN)"Program is ready" $(RESET)
+$(NAME): $(OBJ) 
+		$(COMP) $(FLAGS) $^ -o $@
+		@echo $(GREEN)"Program is ready" $(RESET)
 
-$(OBJ_F)%.o: %.cpp
-	@$(CC) $(FLAGS) -c -o $@ $<
-
-$(OBJ_F):
-	@mkdir -p $@
+$(OBJ_DIR)/%.o: %.cpp
+	@mkdir -p $(dir $@)
+	$(COMP) $(FLAGS) -c $< -o $@
 
 clean:
-	@rm -rf $(OBJ_F)
+	@rm -rf $(OBJ_DIR)
 	@echo $(GRAY)$(CURSIVE)$(XXX)"Object files successfully removed!" $(RESET)
 	@echo $(YELLOW)"> Clean" $(RESET)
 

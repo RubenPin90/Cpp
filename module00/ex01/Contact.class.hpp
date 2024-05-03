@@ -1,30 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   megaphone.cpp                                      :+:      :+:    :+:   */
+/*   Contact.class.hpp                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/04/30 12:37:54 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/04/30 15:04:50 by rpinchas         ###   ########.fr       */
+/*   Created: 2024/05/02 17:15:29 by rpinchas          #+#    #+#             */
+/*   Updated: 2024/05/02 17:26:40 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#ifndef CONTACT_CLASS_HPP
+# define CONTACT_CLASS_HPP
 #include <iostream>
 #include <string>
 
-void    ft_transform(std::string str) {
-    for(int j = 0; str[j]; j++)
-        std::cout << static_cast<char>(std::toupper(str[j]));
-}
+class Contact {
+    public:
+        Contact(void);
+        ~Contact(void);
+        void    setContact(void);
+        void    getContact(void);
 
-int    main (int argc, char *argv[]) {
-    if (argc > 1) {
-        for (int i = 1; i < argc; i++)
-            ft_transform(argv[i]);
-        std::cout << std::endl;
-    }
-    else
-        std::cout << "* LOUD AND UNBEARABLE FEEDBACK NOISE *" << std::endl;
-    return (0);
-}
+    private:
+        std::string firstn;
+        std::string lastn;
+        std::string nickn;
+        std::string phone;
+        std::string secret;
+};
+
+
+#endif

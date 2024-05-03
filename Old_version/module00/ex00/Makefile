@@ -5,19 +5,18 @@
 #                                                     +:+ +:+         +:+      #
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2024/04/30 12:37:50 by rpinchas          #+#    #+#              #
-#    Updated: 2024/04/30 16:58:58 by rpinchas         ###   ########.fr        #
+#    Created: 2023/12/27 21:33:28 by rpinchas          #+#    #+#              #
+#    Updated: 2023/12/27 21:33:29 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := megaphone
+NAME = megaphone
+CC = c++ -g
+FLAGS = -Wall -Wextra -Werror -std=c++98
 
-COMP := c++ -g
-FLAGS := -Wall -Werror -Wextra -std=c++98
-
-SRC := megaphone.cpp
-OBJ_DIR := ./obj
-OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
+SRC = megaphone.cpp
+OBJ_F = obj/
+OBJ = $(addprefix $(OBJ_F), $(SRC:%.cpp=%.o))
 
 # colors
 GREEN		='\033[32m'
@@ -30,16 +29,18 @@ RESET		='\033[0m'
 
 all: $(NAME)
 
-$(NAME): $(OBJ) 
-		$(COMP) $(FLAGS) $< -o $@
-		@echo $(GREEN)"Program is ready" $(RESET)
+$(NAME): $(OBJ_F) $(OBJ)
+	@$(CC) $(FLAGS) -o $@ $(OBJ)
+	@echo $(GREEN)"Program is ready" $(RESET)
 
-$(OBJ_DIR)/%.o: %.cpp
-	@mkdir -p $(dir $@)
-	$(COMP) $(FLAGS) -c $< -o $@
+$(OBJ_F)%.o: %.cpp
+	@$(CC) $(FLAGS) -c -o $@ $<
+
+$(OBJ_F):
+	@mkdir -p $@
 
 clean:
-	@rm -rf $(OBJ_DIR)
+	@rm -rf $(OBJ_F)
 	@echo $(GRAY)$(CURSIVE)$(XXX)"Object files successfully removed!" $(RESET)
 	@echo $(YELLOW)"> Clean" $(RESET)
 
