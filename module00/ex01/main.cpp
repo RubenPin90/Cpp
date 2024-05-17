@@ -21,6 +21,7 @@ void print_welcome() {
 
 int main () {
     std::string input;
+    PhoneBook   rubenbook;
 
     print_welcome();
     while (1) {
@@ -31,13 +32,15 @@ int main () {
         }
         else if (input == "SEARCH") {
             std::cout << "You entered: " << input << std::endl;
+            rubenbook.printlist();
         }
         else if (input == "EXIT") {
             std::cout << "You entered: " << input << std::endl;
-            PhoneBook::exit();
+            if (rubenbook.ft_exit())
+                break;
         }
         else
             std::cout << "** Wrong input **" << std::endl << "Only ADD, SEARCH or EXIT accepted" << std::endl;
     }
-
+    return (0);
 }
