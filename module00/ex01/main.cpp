@@ -48,7 +48,6 @@ int main () {
         if (!std::cin)
             break;
         if (input == "ADD") {
-            std::cout << "Adding new contact: " << std::endl;
             rubenbook.add();
         }
         else if (input == "SEARCH") {

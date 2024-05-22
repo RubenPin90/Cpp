@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:35:47 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/22 16:44:14 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/05/22 18:02:14 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,12 +43,16 @@ void    PhoneBook::printlist(void) const{
 }
 
 void    PhoneBook::add(void) {
-    for(int i = 0; i < 8; i++) {
-        _people[i].
-    }
+    static int   i;
+   
+    if (i == 8)
+        i = 0;
+    _people[i].setContact();
+    if(!_people[i].getInfo("firstname").empty() &&
+        !_people[i].getInfo("lastname").empty() &&
+        !_people[i].getInfo("nickname").empty())
+        i++;
 }
-
-
 
 void    PhoneBook::search(void) const {
     char        index;
