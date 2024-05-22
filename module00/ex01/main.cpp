@@ -19,28 +19,49 @@ void print_welcome() {
     std::cout << std::endl;
 }
 
+int checkinput(std::string str) {
+    char check;
+
+    if (str.length() == 1) {
+        check = std::tolower(str[0]);
+        return ((check == 'n') ? 0 : ((check == 'y') ? 1 : -1));
+    }
+    return (-1);
+}
+
+std::string trunc(std::string str) {
+    if (str.size() > 10) {
+        str.resize(9);
+        str += '.';
+    }
+    return (str);
+}
+
 int main () {
     std::string input;
     PhoneBook   rubenbook;
 
     print_welcome();
-    while (1) {
-        std::cout << "Waiting for input: ";
+    while (std::cin) {
+        std::cout << "\n" << "Waiting for input: ";
         std::cin >> input;
+        if (!std::cin)
+            break;
         if (input == "ADD") {
-            std::cout << "You entered: " << input << std::endl;
+            std::cout << "Adding new contact: " << std::endl;
+            rubenbook.add();
         }
         else if (input == "SEARCH") {
-            std::cout << "You entered: " << input << std::endl;
-            rubenbook.printlist();
+            rubenbook.search();
         }
         else if (input == "EXIT") {
-            std::cout << "You entered: " << input << std::endl;
             if (rubenbook.ft_exit())
                 break;
         }
-        else
-            std::cout << "** Wrong input **" << std::endl << "Only ADD, SEARCH or EXIT accepted" << std::endl;
+        else {
+            std::cout << "** Wrong input **" << std::endl;
+            std::cout << "Only ADD, SEARCH or EXIT accepted" << std::endl;
+        }
     }
     return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:15:29 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/16 18:15:58 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/05/22 14:04:46 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ class Contact {
         ~Contact(void);
         void    setContact(void);
         void    getContact(void) const;
+        std::string    getInfo(std::string) const;
 
     private:
         std::string _firstn;

@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:23:41 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/17 14:51:10 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/05/22 15:00:27 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,13 @@ class   PhoneBook {
         int     ft_exit(void) const;
         void    printlist(void) const;
 
+
     private:
         Contact _people[8];
 };
+
+std::string trunc(std::string str);
+int         checkinput(std::string check);
 
 #endif
 
