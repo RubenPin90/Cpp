@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/02 17:15:29 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/22 18:03:51 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/05/28 00:50:57 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ class Contact {
         ~Contact(void);
         void            setContact(void);
         void            getContact(void) const;
-        int             ft_empty(void) const;
-        std::string     getInfo(std::string) const;
+        int             ft_isvalid(std::string str) const;
+        std::string     getInfo(std::string str) const;
 
     private:
         std::string _firstn;
@@ -31,5 +31,8 @@ class Contact {
         std::string _phone;
         std::string _secret;
 };
+
+std::string rmws(std::string str);
+int         onlydigit(std::string str);
 
 #endif

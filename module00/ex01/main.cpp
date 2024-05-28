@@ -19,6 +19,36 @@ void print_welcome() {
     std::cout << std::endl;
 }
 
+int onlydigit(std::string str) {
+    int nr = str.length();
+
+	for (int i = 0; i < nr; i++) {
+		if (!std::isdigit(str[i])) {
+            return (1);
+        }
+    }
+   return (0);
+}
+
+std::string rmws(std::string str) {
+    int         length = str.length();
+    bool        ws = false;
+    std::string temp;
+
+    for (int i = 0; i < length; i++) {
+        if(std::isspace(str[i])) {
+            ws = true;
+        } else {
+            if (ws == true)
+                temp += ' ';
+            temp += str[i];
+            ws = false;
+        }
+    }
+    return (temp);
+}
+
+
 int checkinput(std::string str) {
     char check;
 

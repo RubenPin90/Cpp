@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:35:47 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/22 18:02:14 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/05/28 02:30:58 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,37 +48,38 @@ void    PhoneBook::add(void) {
     if (i == 8)
         i = 0;
     _people[i].setContact();
-    if(!_people[i].getInfo("firstname").empty() &&
-        !_people[i].getInfo("lastname").empty() &&
-        !_people[i].getInfo("nickname").empty())
+    if(std::cin) {
+	    std::cout << "\nSUCCESS!\n";
+	    std::cout << "New Person has been added to the contacts." << std::endl;
         i++;
+    }
 }
 
 void    PhoneBook::search(void) const {
-    char        index;
+    std::string index;
     int         ret;
     std::string check;
     
     printlist();
     while (std::cin) {
         std::cout << "\nEnter the contact index you want to display: ";
-        std::cin >> index;
+		std::cin >> index;
         if (!std::cin)
-            break;
-        if (index >= '0' && index <= '7') {
-            _people[index - '0'].getContact();
+		    break;
+        if (index.length() == 1 && index[0] >= '0' && index[0] <= '7') {
+            _people[index[0] - '0'].getContact();
             std::cout << "\nDo you want to see another contact? (Y / N)" << std::endl;
-            std::cin >> check; 
+		    std::cin >> check;
+            if (!std::cin)
+			    break;
             ret = checkinput(check);
             if (ret < 0) {
                 std::cout << "\n***** Wrong input. Going back to HOME" << std::endl;
                 break;
-            }
-            else if (ret == 0) {
+            } else if (ret == 0) {
                 std::cout << "\n***** Going back to HOME" << std::endl;
                 break;
-            }
-            else
+            } else
                 continue;
         }
         else

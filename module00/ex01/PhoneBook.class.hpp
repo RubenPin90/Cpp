@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/30 17:23:41 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/22 15:00:27 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/05/28 02:00:35 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 #include <cstdlib>
 #include <iomanip> 
 #include <iostream>
+#include <limits>
 
 class   PhoneBook {
     public:
