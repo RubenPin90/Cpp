@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/03 13:35:51 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/28 01:26:48 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/05/29 18:56:20 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,12 +30,12 @@ int     Contact::ft_isvalid(std::string str) const {
 		if (std::isalnum(str[i]))
 			valid = true;
 		else if (!std::isspace(str[i])) {
-			std::cout << "Used invalid characters. Try again.\n";
+			std::cerr << "Used invalid characters. Try again.\n";
 			return (1);
 		}
 	}
 	if (!valid) {
-		std::cout << "Empty String. Try again.\n";
+		std::cerr << "Empty String. Try again.\n";
 		return (1);
 	}
 	return (0);
@@ -53,7 +53,7 @@ void    Contact::setContact(void) {
 			break;
 		input[i] = rmws(input[i]);
 		if (i == 3 && onlydigit(input[i])) {
-			std::cout << "Ups wrong phonenr. Only numbers accepted. Try again.\n";
+			std::cerr << "Ups not valid phone number. Try again.\n";
 			i--;
 		} else if (ft_isvalid(input[i]))
 			i--;

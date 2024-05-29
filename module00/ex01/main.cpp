@@ -74,8 +74,7 @@ int main () {
     print_welcome();
     while (std::cin) {
         std::cout << "\n" << "Waiting for input: ";
-        std::cin >> input;
-        if (!std::cin)
+        if (!std::getline(std::cin, input))
             break;
         if (input == "ADD") {
             rubenbook.add();
@@ -88,9 +87,11 @@ int main () {
                 break;
         }
         else {
-            std::cout << "** Wrong input **" << std::endl;
+            std::cerr << "** Wrong input **" << std::endl;
             std::cout << "Only ADD, SEARCH or EXIT accepted" << std::endl;
         }
     }
+    if (!std::cin)
+        std::cout << "^D" << std::endl;
     return (0);
 }
