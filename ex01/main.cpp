@@ -48,7 +48,6 @@ std::string rmws(std::string str) {
     return (temp);
 }
 
-
 int checkinput(std::string str) {
     char check;
 
