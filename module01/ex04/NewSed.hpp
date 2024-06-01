@@ -1,30 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   HumanB.hpp                                         :+:      :+:    :+:   */
+/*   NewSed.hpp                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 23:45:43 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/05/31 16:32:43 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/01 22:42:39 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef HUMANB_HPP
-#define HUMANB_HPP
+#ifndef NEWSED_HPP
+#define NEWSED_HPP
 #include <iostream>
-#include "Weapon.hpp"
+#include <fstream>
+#include <sstream>
+#define SUCCESS 0
+#define FAIL 1
 
-class HumanB {
+class NewSed {
 	public:
-		HumanB(std::string name);
-		~HumanB(void);
-		void		setWeapon(Weapon& newweapon);
-		void		attack(void) const;
+		NewSed(const std::string& filename, const std::string& str1, const std::string& str2);
+		~NewSed(void);
+		void		setter();
+		std::string	getter() const;
+		int			openFile(void);
 
 	private:
-		std::string	_name;
-		Weapon*		_weapon;
+		std::string _file;
+		std::string	_s1;
+		std::string	_s2;
 };
 
 #endif

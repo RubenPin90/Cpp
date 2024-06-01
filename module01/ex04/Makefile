@@ -6,18 +6,16 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/05/31 12:49:32 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/05/31 17:42:18 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := unnecessary_violence
+NAME := sed_is_for_losers
 
 COMP := c++ -g
 FLAGS := -Wall -Werror -Wextra -std=c++98
 
-SRC := HumanA.cpp \
-		HumanB.cpp \
-		Weapon.cpp \
+SRC :=	NewSed.cpp \
 		main.cpp
 OBJ_DIR := ./obj
 OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
@@ -51,7 +49,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 	@mkdir -p $(dir $@)
 	@$(COMP) $(FLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES) + 1))))
-	@echo -n "\r\t  ["
+	@echo -n "\r\t    ["
 	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"====="$(RESET); done
 	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "     "; done
 	@echo -n "] $$(($(COMPILED_FILES) * 100 / $(TOTAL_FILES)))%"
@@ -59,7 +57,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 .INTERMEDIATE: msg
 msg: 
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+" $(RESET);
-	@echo $(BLUE)"\t|C|+|+| |0|1| |/| |E|X|0|3|" $(RESET);
+	@echo $(BLUE)"\t|C|+|+| |0|1| |/| |E|X|0|4|" $(RESET);
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+\n" $(RESET);
 
 clean:
