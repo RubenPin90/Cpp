@@ -1,36 +1,31 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   NewSed.hpp                                         :+:      :+:    :+:   */
+/*   Harl.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 23:45:43 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/03 00:02:23 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/03 00:01:56 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef NEWSED_HPP
-#define NEWSED_HPP
+#ifndef HARL_HPP
+#define HARL_HPP
 #include <iostream>
-#include <fstream>
-#include <sstream>
 #define SUCCESS 0
 #define FAIL 1
 
-class NewSed {
+class Harl {
 	public:
-		NewSed(const std::string& filename, const std::string& str1, const std::string& str2);
-		~NewSed(void);
-		int			openFile(void);
-		int			transferAndReplace(void);
+		Harl(void);
+		~Harl(void);
+		void		setter();
+		std::string	getter() const;
 
 	private:
-		std::string _file;
-		std::string	_s1;
-		std::string	_s2;
-		std::ifstream _ifs;
-		std::ofstream _ofs;
+
+
 };
 
 #endif

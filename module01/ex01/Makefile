@@ -6,14 +6,14 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/05/30 21:59:56 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/02 23:46:56 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := Zombiehorde
 
 COMP := c++ -g
-FLAGS := -Wall -Werror -Wextra -std=c++98
+FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
 
 SRC := Zombie.cpp \
 		zombieHorde.cpp \

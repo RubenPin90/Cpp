@@ -6,7 +6,7 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 08:56:37 by rpinchas          #+#    #+#              #
-#    Updated: 2024/05/30 17:28:17 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/02 23:47:10 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@
 NAME := Zombie
 
 COMP := c++ -g
-FLAGS := -Wall -Werror -Wextra -std=c++98
+FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
 
 SRC := Zombie.cpp \
 		newZombie.cpp \

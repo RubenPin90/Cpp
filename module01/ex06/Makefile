@@ -6,18 +6,16 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/02 21:52:02 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/03 00:01:28 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := unnecessary_violence
+NAME := harl
 
 COMP := c++ -g
 FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
 
-SRC := HumanA.cpp \
-		HumanB.cpp \
-		Weapon.cpp \
+SRC :=	Harl.cpp \
 		main.cpp
 OBJ_DIR := ./obj
 OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
@@ -41,8 +39,8 @@ $(NAME): $(OBJ)
 	@$(COMP) $(FLAGS) $^ -o $@
 	@if [ $(COMPILED_FILES) -ne $(TOTAL_FILES) ]; then \
 		echo -n "\r\t   ["; \
-		for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"====="$(RESET); done; \
-		for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n $(GREEN)"====="$(RESET); done; \
+		for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
+		for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
 		echo -n "] 100%"; fi
 	@sleep 0.3
 	@echo "\n\n" $(GREEN)"\t    Program is ready!\n" $(RESET)
@@ -51,20 +49,20 @@ $(OBJ_DIR)/%.o: %.cpp msg
 	@mkdir -p $(dir $@)
 	@$(COMP) $(FLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES) + 1))))
-	@echo -n "\r\t  ["
-	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"====="$(RESET); done
+	@echo -n "\r\t      ["
+	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done
 	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "     "; done
 	@echo -n "] $$(($(COMPILED_FILES) * 100 / $(TOTAL_FILES)))%"
 
 .INTERMEDIATE: msg
 msg: 
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+" $(RESET);
-	@echo $(BLUE)"\t|C|+|+| |0|1| |/| |E|X|0|3|" $(RESET);
+	@echo $(BLUE)"\t|C|+|+| |0|1| |/| |E|X|0|6|" $(RESET);
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+\n" $(RESET);
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@echo $(GRAY)$(CURSIVE)$(XXX)"Object files successfully removed!" $(RESET)
+	@echo $(GRAY)$(CURSIVE)$(XXX)"Object files and Output file successfully removed!" $(RESET)
 	@echo $(YELLOW)"> Clean" $(RESET)
 
 fclean: clean

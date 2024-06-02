@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/02 23:36:01 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/03 00:02:31 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,13 +17,6 @@ NewSed::NewSed(const std::string& filename, const std::string& str1, const std::
 }
 
 NewSed::~NewSed(void) {
-}
-
-void		NewSed::setter(void) {
-}
-
-std::string		NewSed::getter(void) const {
-	return "";
 }
 
 int	NewSed::openFile(void) {
