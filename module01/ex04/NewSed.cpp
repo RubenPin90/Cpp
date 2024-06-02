@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/01 23:21:21 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/02 23:36:01 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,37 +27,40 @@ std::string		NewSed::getter(void) const {
 }
 
 int	NewSed::openFile(void) {
-	std::ifstream ifs;
-	std::ofstream ofs;
+	this->_ifs.open(this->_file.c_str());
+	if (!this->_ifs.is_open()) {
+        std::cerr << "Error: Could not open the file." << std::endl;
+        return FAIL;
+	}
+	size_t dotPos = this->_file.find('.');
+	std::string outFile = this->_file;
+	if (dotPos != std::string::npos)
+		outFile.erase(dotPos);
+	this->_ofs.open((outFile + "_replaced.txt").c_str());
+	if (!this->_ofs.is_open()) {
+        std::cerr << "Error: Could not open the file." << std::endl;
+		this->_ifs.close();
+    	return FAIL;
+	}
+	return SUCCESS;
+}
 
-	ifs.open(_file.c_str());
-	if (!ifs.is_open()) {
-        std::cerr << "Error: Could not open the file." << std::endl;
-        return 1;
-	}
-	ofs.open("output");
-	if (!ofs.is_open()) {
-        std::cerr << "Error: Could not open the file." << std::endl;
-		ifs.close();
-    	return 1;
-	}
+int NewSed::transferAndReplace(void) {
 	std::string line;
 	std::stringstream tmp;
-	while (std::getline(ifs, line)) {
+
+	while (std::getline(this->_ifs, line)) {
 		tmp << line << '\n';
 	}
 	line = tmp.str();
-	size_t	needlePos = 0;
+	size_t	needlePos = line.find(this->_s1);
 	while (needlePos != std::string::npos) {
-		needlePos = line.find(_s1);
-		if (needlePos != std::string::npos) {
-			std::cout << line << std::endl;
-			line.erase (needlePos, _s1.length());
-			line.insert (needlePos, _s2);
-		}
+			line.erase(needlePos, this->_s1.length());
+			line.insert(needlePos, this->_s2);
+			needlePos = line.find(this->_s1, needlePos + this->_s2.length());
 	}
-	ofs << line;
-	ifs.close();
-	ofs.close();
-	return 0;
+	this->_ofs << line;
+	this->_ifs.close();
+	this->_ofs.close();
+	return SUCCESS;
 }

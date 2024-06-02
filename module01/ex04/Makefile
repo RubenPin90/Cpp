@@ -6,14 +6,14 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/05/31 17:42:18 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/02 23:39:43 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := sed_is_for_losers
 
 COMP := c++ -g
-FLAGS := -Wall -Werror -Wextra -std=c++98
+FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
 
 SRC :=	NewSed.cpp \
 		main.cpp
@@ -39,8 +39,8 @@ $(NAME): $(OBJ)
 	@$(COMP) $(FLAGS) $^ -o $@
 	@if [ $(COMPILED_FILES) -ne $(TOTAL_FILES) ]; then \
 		echo -n "\r\t   ["; \
-		for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"====="$(RESET); done; \
-		for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n $(GREEN)"====="$(RESET); done; \
+		for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
+		for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
 		echo -n "] 100%"; fi
 	@sleep 0.3
 	@echo "\n\n" $(GREEN)"\t    Program is ready!\n" $(RESET)
@@ -49,8 +49,8 @@ $(OBJ_DIR)/%.o: %.cpp msg
 	@mkdir -p $(dir $@)
 	@$(COMP) $(FLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES) + 1))))
-	@echo -n "\r\t    ["
-	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"====="$(RESET); done
+	@echo -n "\r\t      ["
+	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done
 	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "     "; done
 	@echo -n "] $$(($(COMPILED_FILES) * 100 / $(TOTAL_FILES)))%"
 
@@ -62,7 +62,8 @@ msg:
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@echo $(GRAY)$(CURSIVE)$(XXX)"Object files successfully removed!" $(RESET)
+	@rm -rf *_replaced.txt
+	@echo $(GRAY)$(CURSIVE)$(XXX)"Object files and Output file successfully removed!" $(RESET)
 	@echo $(YELLOW)"> Clean" $(RESET)
 
 fclean: clean
