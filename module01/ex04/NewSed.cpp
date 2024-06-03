@@ -6,11 +6,12 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/03 00:02:31 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:37:19 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "NewSed.hpp"
+#define HIDDEN_FILE 0
 
 NewSed::NewSed(const std::string& filename, const std::string& str1, const std::string& str2) \
 		: _file(filename), _s1(str1), _s2(str2) {
@@ -19,17 +20,30 @@ NewSed::NewSed(const std::string& filename, const std::string& str1, const std::
 NewSed::~NewSed(void) {
 }
 
-int	NewSed::openFile(void) {
+std::string NewSed::_createOutFile(std::string str) {
+	if (str.empty())
+		return "";
+	size_t dotPos = str.find_last_of('.');
+	if (dotPos != std::string::npos && dotPos != HIDDEN_FILE && dotPos != str.length()) {
+		std::string suffix = str.substr(dotPos);
+		str.erase(dotPos);
+		str = str + "_replaced" + suffix;
+	} else {
+		str += "_replaced";
+	}
+	return str;
+}
+
+int	NewSed::openFiles(void) {
 	this->_ifs.open(this->_file.c_str());
 	if (!this->_ifs.is_open()) {
         std::cerr << "Error: Could not open the file." << std::endl;
         return FAIL;
 	}
-	size_t dotPos = this->_file.find('.');
-	std::string outFile = this->_file;
-	if (dotPos != std::string::npos)
-		outFile.erase(dotPos);
-	this->_ofs.open((outFile + "_replaced.txt").c_str());
+	std::string outFile = this->_createOutFile(this->_file);
+	if (outFile.empty())
+		return FAIL;
+	this->_ofs.open((outFile).c_str());
 	if (!this->_ofs.is_open()) {
         std::cerr << "Error: Could not open the file." << std::endl;
 		this->_ifs.close();

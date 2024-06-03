@@ -6,7 +6,7 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/02 23:39:43 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/03 12:30:37 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,7 @@ all: $(NAME)
 $(NAME): $(OBJ) 
 	@$(COMP) $(FLAGS) $^ -o $@
 	@if [ $(COMPILED_FILES) -ne $(TOTAL_FILES) ]; then \
-		echo -n "\r\t   ["; \
+		echo -n "\r\t      ["; \
 		for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
 		for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
 		echo -n "] 100%"; fi
@@ -62,7 +62,7 @@ msg:
 
 clean:
 	@rm -rf $(OBJ_DIR)
-	@rm -rf *_replaced.txt
+	@find . -name '*_replaced*' -exec rm -rf {} +
 	@echo $(GRAY)$(CURSIVE)$(XXX)"Object files and Output file successfully removed!" $(RESET)
 	@echo $(YELLOW)"> Clean" $(RESET)
 

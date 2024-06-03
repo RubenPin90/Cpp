@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:15:23 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/02 22:24:09 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/03 12:23:38 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int main(int ac, char *av[]) {
 		return FAIL;
 	}
 	NewSed* sifl = new NewSed(av[1], av[2], av[3]);
-	if (sifl->openFile() != SUCCESS)
+	if (sifl->openFiles() != SUCCESS)
 		return (ft_close(sifl), FAIL);
 	if (sifl->transferAndReplace() != SUCCESS)
 		return (ft_close(sifl), FAIL);
