@@ -6,14 +6,14 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/03 12:37:19 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:51:39 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "NewSed.hpp"
 #define HIDDEN_FILE 0
 
-NewSed::NewSed(const std::string& filename, const std::string& str1, const std::string& str2) \
+NewSed::NewSed(char *filename, const std::string& str1, const std::string& str2) \
 		: _file(filename), _s1(str1), _s2(str2) {
 }
 

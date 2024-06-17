@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 23:45:43 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/05 18:52:33 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/15 11:30:46 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,16 @@
 class Fixed {
 	public:
 		Fixed(void);
+		Fixed(const Fixed& ref);
 		~Fixed(void);
-		std::string getRawBits(void);
+		Fixed& operator=(const Fixed& rhs);
+	
+			int			getRawBits(void) const;
+			void		setRawBits(int i);
 
 	private:
-	
-}
+		int 			 _value;
+		static const int _frac_bits = 8;
+};
 	
 #endif

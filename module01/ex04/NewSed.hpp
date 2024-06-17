@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 23:45:43 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/03 12:22:52 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/12 09:51:52 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 
 class NewSed {
 	public:
-		NewSed(const std::string& filename, const std::string& str1, const std::string& str2);
+		NewSed(char* filename, const std::string& str1, const std::string& str2);
 		~NewSed(void);
 		int			openFiles(void);
 		int			transferAndReplace(void);

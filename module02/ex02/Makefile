@@ -6,11 +6,11 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/05 18:55:04 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/15 23:02:53 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := Now_Were_Talking
+NAME := Fixed
 
 COMP := c++ -g
 FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic

@@ -6,13 +6,14 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 23:45:43 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/05 18:52:33 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/15 14:03:02 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef FIXED_HPP
 #define FIXED_HPP
 #include <iostream>
+#include <cmath>
 #define SUCCESS 0
 #define FAIL 1
 
@@ -25,11 +26,22 @@
 class Fixed {
 	public:
 		Fixed(void);
+		Fixed(const Fixed& ref);
+		Fixed(const int i);
+		Fixed(const float fl);
 		~Fixed(void);
-		std::string getRawBits(void);
+		Fixed& operator=(const Fixed& rhs);
+
+		int			toInt(void) const;
+		float 		toFloat(void) const;
+		int			getRawBits(void) const;
+		void		setRawBits(int i);
 
 	private:
-	
-}
-	
+		int 			 _value;
+		static const int _frac_bits = 8;
+};
+
+std::ostream& operator<<(std::ostream& ost, const Fixed& rhs);
+
 #endif

@@ -6,13 +6,13 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:15:23 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/05 18:55:41 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/15 13:51:47 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-int main(int ac, char *av[]) {
+int main(void) {
 	
 	Fixed a;
 	Fixed const b( 10 );
@@ -27,5 +27,9 @@ int main(int ac, char *av[]) {
 	std::cout << "b is " << b.toInt() << " as integer" << std::endl;
 	std::cout << "c is " << c.toInt() << " as integer" << std::endl;
 	std::cout << "d is " << d.toInt() << " as integer" << std::endl;
+	std::cout << "a is " << a.toFloat() << " as float" << std::endl;
+	std::cout << "b is " << b.toFloat() << " as float" << std::endl;
+	std::cout << "c is " << c.toFloat() << " as float" << std::endl;
+	std::cout << "d is " << d.toFloat() << " as float" << std::endl;
 	return 0;
 }

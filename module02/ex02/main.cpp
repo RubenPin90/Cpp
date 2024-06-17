@@ -6,13 +6,13 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:15:23 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/05 18:56:11 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/16 00:03:55 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "Fixed.hpp"
 
-int main(int ac, char *av[]) {
+int main(void) {
 	
 	Fixed a;
 	Fixed const b( Fixed( 5.05f ) * Fixed( 2 ) );
