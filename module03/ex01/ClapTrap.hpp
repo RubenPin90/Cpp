@@ -1,40 +1,49 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Fixed.hpp                                          :+:      :+:    :+:   */
+/*   ClapTrap.hpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 23:45:43 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/17 12:01:03 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:01:48 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FIXED_HPP
-#define FIXED_HPP
+#ifndef CLAPTRAP_HPP
+#define CLAPTRAP_HPP
 #include <iostream>
 #define SUCCESS 0
 #define FAIL 1
-
 #define RED "\033[31m"
 #define GREEN "\033[32m"
 #define YELLOW "\033[33m"
 #define BLUE "\033[34m"
 #define RESET "\033[0m"
 
-class Fixed {
+class ClapTrap {
 	public:
-		Fixed(void);
-		Fixed(const Fixed& ref);
-		~Fixed(void);
-		Fixed& operator=(const Fixed& rhs);
-	
-			int			getRawBits(void) const;
-			void		setRawBits(int i);
+		ClapTrap(const std::string& name);
+		ClapTrap(const ClapTrap& ref);
+		virtual ~ClapTrap(void);
+		ClapTrap& operator=(const ClapTrap& rhs);
+		
+		
+		std::string	getName(void) const;
+		int			getInt(const std::string& value) const;
+		bool		getBool(void) const;
+		virtual void 		attack(const std::string& target);
+		void 		takeDamage(unsigned int amount);
+		void 		beRepaired(unsigned int amount);
 
-	private:
-		int 			 _value;
-		static const int _frac_bits = 8;
+	protected:
+		std::string m_name;
+		int			m_hit;
+		int			m_energy;
+		int			m_attack;
+		bool		m_failure;
 };
-	
+
+std::ostream& operator<<(std::ostream& ost, const ClapTrap& rhs);
+
 #endif

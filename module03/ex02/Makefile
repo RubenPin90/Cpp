@@ -6,16 +6,18 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/17 12:01:13 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/18 21:20:17 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := First_Orthodox_Class
+NAME := ScravTrap
 
 COMP := c++ -g
 FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
 
-SRC :=	Fixed.cpp \
+SRC :=	FragTrap.cpp \
+		ClapTrap.cpp \
+		ScavTrap.cpp \
 		main.cpp
 OBJ_DIR := ./obj
 OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
@@ -57,7 +59,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 .INTERMEDIATE: msg
 msg: 
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+" $(RESET);
-	@echo $(BLUE)"\t|C|+|+| |0|2| |/| |E|X|0|0|" $(RESET);
+	@echo $(BLUE)"\t|C|+|+| |0|3| |/| |E|X|0|2|" $(RESET);
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+\n" $(RESET);
 
 clean:

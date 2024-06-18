@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/15 14:11:24 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/17 12:01:20 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,4 +63,3 @@ std::ostream& operator<<(std::ostream& ost, const Fixed& rhs) {
 	ost << rhs.toFloat();
 	return (ost);
 }
-
