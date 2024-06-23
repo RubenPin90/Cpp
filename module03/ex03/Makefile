@@ -6,16 +6,18 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/19 16:27:34 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/23 19:15:44 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := ScravTrap
+NAME := DiamondTrap
 
 COMP := c++ -g
-FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
+FLAGS := -Wall -Werror -Wextra -Wshadow -std=c++98 -pedantic 
 
-SRC :=	ClapTrap.cpp \
+SRC :=	DiamondTrap.cpp \
+		FragTrap.cpp \
+		ClapTrap.cpp \
 		ScavTrap.cpp \
 		main.cpp
 OBJ_DIR := ./obj
@@ -50,7 +52,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 	@mkdir -p $(dir $@)
 	@$(COMP) $(FLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES) + 1))))
-	@echo -n "\r\t      ["
+	@echo -n "\r\t ["
 	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done
 	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "    "; done
 	@echo -n "] $$(($(COMPILED_FILES) * 100 / $(TOTAL_FILES)))%"
@@ -58,7 +60,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 .INTERMEDIATE: msg
 msg: 
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+" $(RESET);
-	@echo $(BLUE)"\t|C|+|+| |0|3| |/| |E|X|0|1|" $(RESET);
+	@echo $(BLUE)"\t|C|+|+| |0|3| |/| |E|X|0|3|" $(RESET);
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+\n" $(RESET);
 
 clean:

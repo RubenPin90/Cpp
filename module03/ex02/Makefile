@@ -6,11 +6,11 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/18 21:20:17 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/20 20:24:34 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := ScravTrap
+NAME := FragTrap
 
 COMP := c++ -g
 FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic
@@ -53,7 +53,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 	@$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES) + 1))))
 	@echo -n "\r\t      ["
 	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done
-	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "     "; done
+	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "    "; done
 	@echo -n "] $$(($(COMPILED_FILES) * 100 / $(TOTAL_FILES)))%"
 
 .INTERMEDIATE: msg

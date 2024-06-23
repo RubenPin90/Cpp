@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/18 21:00:07 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:46:11 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,17 @@
 
 ClapTrap::ClapTrap(const std::string& name) : m_name(name), m_hit(HITPOINTS_MAX), \
 				m_energy(EPOINTS_MAX), m_attack(DAMAGE_POINTS), m_failure(false) {
-	std::cout << GREEN"[Default Constructor]:\t"RESET;
+	std::cout << GREEN "[ClapTrap Default Constructor]:\t" RESET;
 	std::cout << "ClapTrap " << this->m_name << " was born." << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& ref) : m_name(ref.m_name + "'s clone"), m_hit(ref.m_hit), m_energy(ref.m_energy), m_attack(ref.m_attack) {
-	std::cout << BLUE"[Copy Constructor]:\t"RESET;
+	std::cout << BLUE "[ClapTrap Copy Constructor]:\t" RESET;
 	std::cout << "ClapTrap " << this->m_name << " has been created." << std::endl;
 }
 
 ClapTrap::~ClapTrap(void) {
-	std::cout << RED"[Deconstructor]:\t"RESET;
+	std::cout << RED "[ClapTrap Deconstructor]:\t" RESET;
 	std::cout << "ClapTrap " << this->m_name << " has been destroyed." << std::endl;
 }
 
@@ -76,7 +76,7 @@ bool	ClapTrap::getBool(void) const {
 
 //Methods
 void ClapTrap::attack(const std::string& target) {
-	std::cout << YELLOW"[Action//Attack]\t"RESET;
+	std::cout << YELLOW "[Action//Attack]\t" RESET;
 	if (this->m_energy && this->m_hit) {
 		std::cout << "ClapTrap "<< this->m_name << " attacks " << target \
 			<< ", causing " << this->m_attack << " points of damage!" << std::endl;
@@ -88,7 +88,7 @@ void ClapTrap::attack(const std::string& target) {
 }
 
 void ClapTrap::takeDamage(unsigned int amount) {
-	std::cout << YELLOW"[Action//takeDamage]\t"RESET;
+	std::cout << YELLOW "[Action//takeDamage]\t" RESET;
 	if (this->m_hit > 0) {
 		this->m_hit -= amount;
 		std::cout << "Ouch! " << "ClapTrap " << this->m_name << " took " << amount << " hit points damage!" << std::endl;
@@ -101,7 +101,7 @@ void ClapTrap::takeDamage(unsigned int amount) {
 }
 
 void ClapTrap::beRepaired(unsigned int amount) {
-	std::cout << YELLOW"[Action//Repair]\t"RESET;
+	std::cout << YELLOW "[Action//Repair]\t" RESET;
 	if (this->m_energy <= 0) {
 		std::cout << "ClapTrap " << this->m_name << " has not enough energy left to heal." << std::endl;
 		this->m_failure = true;

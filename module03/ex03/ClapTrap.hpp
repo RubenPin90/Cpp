@@ -20,21 +20,33 @@
 #define YELLOW "\033[33m"
 #define BLUE "\033[34m"
 #define RESET "\033[0m"
+#define HITPOINTS_MAX 10
+#define EPOINTS_MAX 10
+#define DAMAGE_POINTS 0
 
 class ClapTrap {
 	public:
+	//Constructors
 		ClapTrap(const std::string& name);
 		ClapTrap(const ClapTrap& ref);
+	
+	//Destructor/Deconstructor
 		virtual ~ClapTrap(void);
+
+	//Operator Overload Functions
 		ClapTrap& operator=(const ClapTrap& rhs);
 		
-		
-		std::string	getName(void) const;
-		int			getInt(const std::string& value) const;
-		bool		getBool(void) const;
+	//Public Methods
 		virtual void 		attack(const std::string& target);
 		void 		takeDamage(unsigned int amount);
 		void 		beRepaired(unsigned int amount);
+	
+	//Getter
+		std::string	getName(void) const;
+		int			getInt(const std::string& value) const;
+		bool		getBool(void) const;
+	
+	//Setter
 
 	protected:
 		std::string m_name;
@@ -44,6 +56,6 @@ class ClapTrap {
 		bool		m_failure;
 };
 
-
+std::ostream& operator<<(std::ostream& ost, const ClapTrap& rhs);
 
 #endif

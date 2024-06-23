@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/30 17:15:23 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/18 21:00:26 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/23 11:51:56 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,10 @@
 #include "ScavTrap.hpp"
 #include <iomanip>
 
-void attack(ClapTrap& aggressor, ClapTrap& victim);
-void print(const ClapTrap& obj1, const ClapTrap& obj2);
+void attack(ScavTrap& aggressor, ClapTrap& victim);
+void print(const ScavTrap& obj1, const ClapTrap& obj2);
 
 int main(void) {
-	{ 
-	ClapTrap bob("Bob");
-	ClapTrap clone(bob);
-	print(bob, clone);
-	for(int i = 0; i < 11; i++)
-		attack(bob, clone);
-	clone.beRepaired(1);
-	print(bob, clone);
-	}
-	std::cout << "\n=========================================\n" << std::endl;
 	{
 	ClapTrap clap("Clap");
 	ScavTrap scav("Scav");
@@ -36,22 +26,25 @@ int main(void) {
 		attack(scav, clap);
 	}
 	scav.guardGate();
+	scav.guardGate();
+	print(scav, clap);
+	ScavTrap new_scav("Bro");
+	scav = new_scav;
 	print(scav, clap);
 	}
-	
 	return 0;
 }
 
-void attack(ClapTrap& aggressor, ClapTrap& victim) {
+void attack(ScavTrap& aggressor, ClapTrap& victim) {
 	if (!victim.getBool())
 		aggressor.attack(victim.getName());
 	else 
-		std::cout << RED"ATTACK FAILED!"RESET << std::endl;
+		std::cout << RED "ATTACK FAILED!" RESET << std::endl;
 	if (!aggressor.getBool())
 		victim.takeDamage(aggressor.getInt("attack"));
 }
 
-void print(const ClapTrap& obj1, const ClapTrap& obj2) {
+void print(const ScavTrap& obj1, const ClapTrap& obj2) {
 	std::string frame = "-------------------------------------------------------------\n";
 	std::string titles [] = {"Names", "Hit Points", "Energy Points", "Attack Damage"};
 	std::cout << frame;

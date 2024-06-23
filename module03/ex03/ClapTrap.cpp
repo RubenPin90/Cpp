@@ -6,32 +6,32 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/19 16:29:01 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/23 18:37:12 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
-#define HITPOINTS_MAX 10
-#define EPOINTS_MAX 10
-#define DAMAGE_POINTS 0
+
 
 ClapTrap::ClapTrap(const std::string& name) : m_name(name), m_hit(HITPOINTS_MAX), \
 				m_energy(EPOINTS_MAX), m_attack(DAMAGE_POINTS), m_failure(false) {
-	std::cout << GREEN "[Default Constructor]:\t" RESET;
+	std::cout << GREEN "[ClapTrap Default Constructor]:\t" RESET;
 	std::cout << "ClapTrap " << this->m_name << " was born." << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap& ref) : m_name(ref.m_name + "'s clone"), m_hit(ref.m_hit), m_energy(ref.m_energy), m_attack(ref.m_attack) {
-	std::cout << BLUE "[Copy Constructor]:\t" RESET;
+	std::cout << BLUE "[ClapTrap Copy Constructor]:\t" RESET;
 	std::cout << "ClapTrap " << this->m_name << " has been created." << std::endl;
 }
 
 ClapTrap::~ClapTrap(void) {
-	std::cout << RED "[Deconstructor]:\t" RESET;
+	std::cout << RED "[ClapTrap Deconstructor]:\t" RESET;
 	std::cout << "ClapTrap " << this->m_name << " has been destroyed." << std::endl;
 }
 
 ClapTrap& ClapTrap::operator=(const ClapTrap& rhs) {
+	std::cout << BLUE "[FragTrap Assignement]:\t" RESET;
+	std::cout << "FragTrap Assignement Operator called." << std::endl;
 	this->m_name = rhs.m_name;
 	this->m_hit = rhs.m_hit;
 	this->m_attack = rhs.m_attack;
