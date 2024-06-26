@@ -6,19 +6,21 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/24 13:36:36 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/25 16:22:05 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := DiamondTrap
+NAME := Polymorphism
 
 COMP := c++ -g
-FLAGS := -Wall -Werror -Wextra -Wshadow -std=c++98 -pedantic 
+FLAGS := -Wall -Werror -Wextra -Wshadow #-std=c++98 -pedantic 
 
-SRC :=	DiamondTrap.cpp \
-		FragTrap.cpp \
-		ClapTrap.cpp \
-		ScavTrap.cpp \
+SRC :=	Brain.cpp \
+		WrongCat.cpp \
+		WrongAnimal.cpp \
+		Dog.cpp \
+		Cat.cpp \
+		Animal.cpp \
 		main.cpp
 OBJ_DIR := ./obj
 OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
@@ -60,7 +62,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 .INTERMEDIATE: msg
 msg: 
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+" $(RESET);
-	@echo $(BLUE)"\t|C|+|+| |0|3| |/| |E|X|0|3|" $(RESET);
+	@echo $(BLUE)"\t|C|+|+| |0|4| |/| |E|X|0|1|" $(RESET);
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+\n" $(RESET);
 
 clean:

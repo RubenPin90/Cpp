@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:17:52 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/18 21:24:20 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:09:24 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ class FragTrap : public ClapTrap {
 	public:
 		FragTrap(const std::string& name);
 		FragTrap(const FragTrap& ref);
-		virtual ~FragTrap(void);
+		~FragTrap(void);
 		FragTrap& operator=(const FragTrap& rhs);
 
 		void highFivesGuys(void);

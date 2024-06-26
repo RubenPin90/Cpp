@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/05/31 12:46:00 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/22 14:51:17 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/24 11:32:25 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@ ScavTrap::ScavTrap(const ScavTrap& ref) : ClapTrap(ref) {
 }
 
 ScavTrap& ScavTrap::operator=(const ScavTrap& rhs) {
-
 	std::cout << BLUE "[ScravTrap Assignement]:\t" RESET;
 	std::cout << "ScravTrap Assignement Operator called." << std::endl;
 	this->m_name = rhs.m_name;

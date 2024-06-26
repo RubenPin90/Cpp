@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:17:52 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/23 19:04:19 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:09:46 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ class DiamondTrap : public ScavTrap, public FragTrap {
 	public:
 		DiamondTrap(const std::string& name);
 		DiamondTrap(const DiamondTrap& ref);
-		virtual ~DiamondTrap(void);
+		~DiamondTrap(void);
 		DiamondTrap&  operator=(const DiamondTrap& rhs);
 
 		void	whoAmI(void);

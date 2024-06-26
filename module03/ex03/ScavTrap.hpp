@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:17:52 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/22 13:37:19 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:10:39 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class ScavTrap : virtual public ClapTrap {
 		ScavTrap(const ScavTrap& ref);
 	
 	//Destructor/Deconstructor
-		virtual ~ScavTrap(void);
+		~ScavTrap(void);
 	
 	//Operator overload functions
 		ScavTrap& operator=(const ScavTrap& rhs);

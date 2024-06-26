@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:17:52 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/22 13:34:52 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:10:56 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ class FragTrap : virtual public ClapTrap {
 		FragTrap(const FragTrap& ref);
 
 	//Destructor/Deconstructor
-		virtual ~FragTrap(void);
+		~FragTrap(void);
 
 	//Operator overload functions
 		FragTrap& operator=(const FragTrap& rhs);

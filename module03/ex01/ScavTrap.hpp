@@ -6,7 +6,7 @@
 /*   By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/06/18 18:17:52 by rpinchas          #+#    #+#             */
-/*   Updated: 2024/06/18 21:08:00 by rpinchas         ###   ########.fr       */
+/*   Updated: 2024/06/24 12:09:08 by rpinchas         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,11 +21,11 @@ class ScavTrap : public ClapTrap {
 	public:
 		ScavTrap(const std::string& name);
 		ScavTrap(const ScavTrap& ref);
-		virtual ~ScavTrap(void);
+		~ScavTrap(void);
 		ScavTrap& operator=(const ScavTrap& rhs);
 
 		void guardGate(void);
-		virtual void attack(const std::string& target);
+		void attack(const std::string& target);
 
 	private:
 		void	m_initvalues(void);
