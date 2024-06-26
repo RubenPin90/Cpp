@@ -6,7 +6,7 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/26 10:03:00 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/26 11:37:46 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,8 @@ $(NAME): $(OBJ)
 	@$(COMP) $(FLAGS) $^ -o $@
 	@if [ $(COMPILED_FILES) -ne $(TOTAL_FILES) ]; then \
 		echo -n "\r\t ["; \
-		for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
-		for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n $(GREEN)"===="$(RESET); done; \
+		for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"==="$(RESET); done; \
+		for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n $(GREEN)"==="$(RESET); done; \
 		echo -n "] 100%"; fi
 	@sleep 0.3
 	@echo "\n\n" $(GREEN)"\t    Program is ready!\n" $(RESET)
@@ -55,8 +55,8 @@ $(OBJ_DIR)/%.o: %.cpp msg
 	@$(COMP) $(FLAGS) -c $< -o $@
 	@$(eval COMPILED_FILES=$(shell echo $$(($(COMPILED_FILES) + 1))))
 	@echo -n "\r\t ["
-	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"===="$(RESET); done
-	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "    "; done
+	@for i in $$(seq 1 $(COMPILED_FILES)); do echo -n $(GREEN)"==="$(RESET); done
+	@for i in $$(seq $$(($(COMPILED_FILES) + 1)) $(TOTAL_FILES)); do echo -n "   "; done
 	@echo -n "] $$(($(COMPILED_FILES) * 100 / $(TOTAL_FILES)))%"
 
 .INTERMEDIATE: msg

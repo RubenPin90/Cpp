@@ -1,4 +1,4 @@
-#ifndef WORNGANIMAL_HPP
+#ifndef WRONGANIMAL_HPP
 #define WRONGANIMAL_HPP
 #include <iostream>
 #define RED "\033[31m"
