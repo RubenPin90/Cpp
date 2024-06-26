@@ -10,6 +10,7 @@ Dog::Dog(const std::string& type) : Animal(type) {
 Dog::Dog(const Dog& ref) : Animal(ref.getType()) {
 	std::cout << BLUE "[Dog Copy Constructor]:\t" RESET;
 	std::cout << "A Dog clone of type " << m_type << " is born." << std::endl;
+	*this = ref;
 }
 
 Dog::~Dog() {

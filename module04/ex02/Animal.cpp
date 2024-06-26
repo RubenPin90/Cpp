@@ -13,7 +13,7 @@ Animal::Animal(const Animal& ref) : m_type(ref.getType()) {
 
 Animal::~Animal() {
 	std::cout << RED "[Animal Deconstructor]:\t" RESET;
-	std::cout << "Animal " << m_type << " has been destroyed." << std::endl;
+	std::cout << "Animal " << m_type << " has been destroyed.\n" << std::endl;
 }
 
 Animal& Animal::operator=(const Animal& rhs) { 
