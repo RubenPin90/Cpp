@@ -12,6 +12,9 @@ void ft_exit(Animal* pack[], int i) {
 
 int main()
 {
+	// Animal animal;
+	// animal.makeSound();
+
 	Animal* Animalpack[AMOUNT];
 	int i = 0;
 	try {

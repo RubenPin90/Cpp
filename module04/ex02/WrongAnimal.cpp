@@ -3,12 +3,12 @@
 
 WrongAnimal::WrongAnimal(const std::string& type) : m_type(type) {
 	std::cout << GREEN "[WrongAnimal Constructor]:\t" RESET;
-	std::cout << "An WrongAnimal of type " << m_type << " is born." << std::endl;
+	std::cout << "An WrongAnimal of type " << m_type << " born." << std::endl;
 }
 
 WrongAnimal::WrongAnimal(const WrongAnimal& ref) : m_type(ref.getType()) {
 	std::cout << BLUE "[WrongAnimal Copy Constructor]:\t" RESET;
-	std::cout << "An WrongAnimal clone of type " << m_type << " is born." << std::endl;
+	std::cout << "An WrongAnimal clone of type " << m_type << " born." << std::endl;
 }
 
 WrongAnimal::~WrongAnimal() {

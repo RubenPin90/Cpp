@@ -3,12 +3,12 @@
 
 WrongCat::WrongCat(const std::string& type) : WrongAnimal(type) {
 	std::cout << GREEN "[WrongCat Constructor]:\t" RESET;
-	std::cout << "An WrongCat of type " << m_type << " is born." << std::endl;
+	std::cout << "An WrongCat of type " << m_type << " born." << std::endl;
 }
 
 WrongCat::WrongCat(const WrongCat& ref) : WrongAnimal(ref.getType()) {
 	std::cout << BLUE "[WrongCat Copy Constructor]:\t" RESET;
-	std::cout << "An WrongCat clone of type " << m_type << " is born." << std::endl;
+	std::cout << "An WrongCat clone of type " << m_type << " born." << std::endl;
 }
 
 WrongCat::~WrongCat() {

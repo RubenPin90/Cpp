@@ -6,14 +6,14 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/05/30 16:48:59 by rpinchas          #+#    #+#              #
-#    Updated: 2024/06/24 16:29:31 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/06/26 10:02:27 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := Polymorphism
 
 COMP := c++ -g
-FLAGS := -Wall -Werror -Wextra -Wshadow -std=c++98 -pedantic 
+FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic 
 
 SRC :=	WrongCat.cpp \
 		WrongAnimal.cpp \
