@@ -18,7 +18,7 @@ class AForm {
 		int		getSignGrade() const;
 		int		getExecGrade() const;
 
-		void	beSigned(const Bureaucrat ref);
+		void	beSigned(const Bureaucrat& ref);
 		void	execute(const Bureaucrat& executor) const;
 		virtual void executeAction(const Bureaucrat& exec) const = 0;
 
@@ -31,7 +31,10 @@ class AForm {
 			public:
 				virtual const char* what() const throw();
 		};
-
+		class FormUnsignedException : public std::exception {
+			public:
+				virtual const char* what() const throw();
+		};
 	
 	private:
 		const std::string 	_name;

@@ -6,7 +6,7 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 14:20:06 by rpinchas          #+#    #+#              #
-#    Updated: 2024/09/09 01:18:56 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/09/09 20:46:22 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -71,6 +71,7 @@ clean:
 
 fclean: clean
 	@rm -rf $(NAME)
+	@rm -f *_shrubbery
 	@echo $(GRAY)$(CURSIVE)$(XXX)"Executables successfully removed!" $(RESET)
 	@echo $(YELLOW)"> All clean" $(RESET)
 
