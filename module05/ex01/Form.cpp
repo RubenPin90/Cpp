@@ -67,5 +67,3 @@ std::ostream& operator<<(std::ostream& ost, const Form& form) {
 	ost << "Execute Grade: " << form.getExecGrade() << std::endl;
 	return (ost);
 }
-
-
