@@ -6,11 +6,11 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 14:20:06 by rpinchas          #+#    #+#              #
-#    Updated: 2024/09/09 20:51:05 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/09/11 21:26:57 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := AForm
+NAME := Intern
 
 COMP := c++ -g
 FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic 

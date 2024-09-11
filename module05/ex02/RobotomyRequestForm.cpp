@@ -28,7 +28,8 @@ RobotomyRequestForm& RobotomyRequestForm::operator=(const RobotomyRequestForm& r
 
 void RobotomyRequestForm::executeAction(const Bureaucrat& executor) const {
 	std::cout << "*Loud Drilling Noise*" << std::endl;
-	if ((rand() % 100) > 50)
+	srand(time(0));
+	if (rand() % 2)
 		std::cout << _target << " has been robotomized successfully by " << executor.getName() << std::endl;
 	else
 		std::cout << "Robotomy on " << _target << " failed." << std::endl;

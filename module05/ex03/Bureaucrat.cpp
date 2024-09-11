@@ -1,15 +1,15 @@
 #include "Bureaucrat.hpp"
 
 Bureaucrat::Bureaucrat() : _name("default"), _grade(LOWEST) {
-	std::cout << "Default Constructor called" << std::endl;
+	std::cout << "Default Bureaucrat Constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(std::string name) : _name(name), _grade(LOWEST) {
-	std::cout << "Name Constructor called" << std::endl;
+	std::cout << "Bureaucrat Constructor called" << std::endl;
 }
 
 Bureaucrat::Bureaucrat(std::string name, int grade) : _name(name) {
-	std::cout << "Name/Grade Constructor called" << std::endl;
+	std::cout << "Bureaucrat Constructor 2 called" << std::endl;
 	_checkGrade(grade);
 	this->_grade = grade;
 }

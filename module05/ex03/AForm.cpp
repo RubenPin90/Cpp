@@ -79,6 +79,8 @@ const char* AForm::FormUnsignedException::what() const throw() {
 	return ("Sorry! Form is not signed!");
 }
 
+
+
 std::ostream& operator<<(std::ostream& ost, const AForm& AForm) {
 	ost << "AForm: " << AForm.getName() << std::endl;
 	ost << "Sign Status: " << AForm.getBool() << std::endl;
