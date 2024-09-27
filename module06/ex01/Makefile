@@ -6,16 +6,18 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/08/19 14:20:06 by rpinchas          #+#    #+#              #
-#    Updated: 2024/09/18 15:25:18 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/09/27 11:27:10 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME := Serialization
+NAME := Serializer
 
 COMP := c++ -g
 FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic 
 
-SRC :=	main.cpp
+SRC :=	Data.cpp \
+		Serializer.cpp \
+		main.cpp
 OBJ_DIR := ./obj
 OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 

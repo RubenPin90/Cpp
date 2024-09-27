@@ -8,19 +8,7 @@ enum e_info {
 	INT,
 	FLOAT,
 	DOUBLE,
-	FAIL,
-	DISPLAYABLE,
-	NONDISPLAYABLE,
-	IMPOSSIBLE
-};
-
-struct TypeInfo {
-	e_info type;
-	double value;
-	e_info CharStatus;
-	e_info IntStatus;
-	e_info FloatStatus;
-	e_info DoubleStatus;
+	FAIL
 };
 
 class ScalarConverter {
