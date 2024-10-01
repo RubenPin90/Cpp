@@ -83,17 +83,17 @@ static void printData(const std::string& str, const std::string status[4], e_inf
 	switch (type) {
 		case CHAR: {
 			unsigned char value = str[0];
-			printer(value, status);	
+			printer(value, status);
 			break;
 		}
 		case INT: {
 			int value = std::atoi(str.c_str());
-			printer(value, status);	
+			printer(value, status);
 			break;
 		}
 		case FLOAT: {
 			float value = std::strtof(str.c_str(), NULL);
-			printer(value, status);	
+			printer(value, status);
 			break;
 		}
 		case DOUBLE: {

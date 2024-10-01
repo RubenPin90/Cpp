@@ -9,11 +9,12 @@ int main (int ac, char *av[]) {
 	const char* str1 = (ac > 1) ? av[1] : "no data";
 	const char* str2 = (ac > 2) ? av[2] : "no data";
 	const char* str3 = (ac > 3) ? av[3] : "no data";
+	std::cout << "Saving following data: " << str1 << ", " << str2 << ", " << str3 << std::endl;
 	Data data((ac - 1), str1, str2, str3);
 	uintptr_t serialized;
 	Data* DataPtr;
 
-	std::cout << "Data Address: " << &data << std::endl;
+	std::cout << "\nData saved under the following Address: " << &data << std::endl;
 	serialized = Serializer::serialize(&data);
 	std::cout << "Serialized Data: " << serialized << std::endl;
 	DataPtr = Serializer::deserialize(serialized);
