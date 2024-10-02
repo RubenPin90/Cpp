@@ -1,7 +1,9 @@
+#include "Array.hpp"
 #include <iostream>
-#include <Array.hpp>
+#include <ctime>
+#include <cstdlib>
 
-#define MAX_VAL 750
+#define MAX_VAL 7
 int main(int, char**)
 {
     Array<int> numbers(MAX_VAL);
@@ -9,9 +11,9 @@ int main(int, char**)
     srand(time(NULL));
     for (int i = 0; i < MAX_VAL; i++)
     {
-        const int value = rand();
-        numbers[i] = value;
-        mirror[i] = value;
+         const int value = rand();
+         numbers[i] = value;
+         mirror[i] = value;
     }
     //SCOPE
     {
@@ -33,11 +35,12 @@ int main(int, char**)
     }
     catch(const std::exception& e)
     {
-        std::cerr << e.what() << '\n';
+        std::cerr << e.what() << " test " << '\n';
     }
     try
     {
-        numbers[MAX_VAL] = 0;
+        numbers[MAX_VAL - 1] = 0;
+        std::cout << numbers[MAX_VAL - 1] << '\n';
     }
     catch(const std::exception& e)
     {
@@ -47,7 +50,8 @@ int main(int, char**)
     for (int i = 0; i < MAX_VAL; i++)
     {
         numbers[i] = rand();
+        std::cout << numbers[i] << '\n';
     }
-    delete [] mirror;//
+    delete [] mirror;
     return 0;
 }
