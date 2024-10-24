@@ -1,7 +1,8 @@
 #include "Span.hpp"
-#define default 10
 
-Span::Span() : _maxValues(default), _vec(std::vector<int>()) {}
+#define DEFAULT 10
+
+Span::Span() : _maxValues(DEFAULT), _vec(std::vector<int>()) {}
 Span::Span(unsigned int value) : _maxValues(value), _vec(std::vector<int>()) {}
 Span::Span(const Span& ref) : _maxValues(ref._maxValues), _vec(std::vector<int>(ref._vec)) {}
 Span::~Span() {}
@@ -50,3 +51,4 @@ void Span::addMulti(v_cit begin, v_cit end) throw(std::invalid_argument, std::ou
 		throw std::out_of_range("Can't add numbers: Range too large for the span.");
 	this->_vec.insert(this->_vec.end(), begin, end);
 }
+

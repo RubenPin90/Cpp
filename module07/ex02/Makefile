@@ -6,7 +6,7 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/18 15:23:09 by rpinchas          #+#    #+#              #
-#    Updated: 2024/10/01 19:20:58 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/10/24 11:04:36 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,7 @@ $(OBJ_DIR)/%.o: %.cpp msg
 .INTERMEDIATE: msg
 msg: 
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+" $(RESET);
-	@echo $(BLUE)"\t|C|+|+| |0|6| |/| |E|X|0|2|" $(RESET);
+	@echo $(BLUE)"\t|C|+|+| |0|7| |/| |E|X|0|2|" $(RESET);
 	@echo $(BLUE)"\t+-+-+-+ +-+-+ +-+ +-+-+-+-+\n" $(RESET);
 
 clean:
