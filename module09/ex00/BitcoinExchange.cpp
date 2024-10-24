@@ -14,6 +14,7 @@ BitEx::BitcoinExchange(const BitEx& ref) {
 }
 
 BitEx::~BitcoinExchange() {}
+
 BitEx& BitEx::operator=(const BitEx& rhs) {
 	if (this == &rhs)
 		return *this;
@@ -22,7 +23,9 @@ BitEx& BitEx::operator=(const BitEx& rhs) {
 }
 
 void BitEx::checkInput(const std::string &input) const {
-	(void)input;
+	std::ifstream fd;
+	fd.open(input);
+	
 	//open file and check if valid.
 }
 

@@ -4,6 +4,7 @@
 #define SUCCESS 0
 #include <iostream>
 #include <map>
+#include <fstream>
 
 struct Date {
 	unsigned int day;
