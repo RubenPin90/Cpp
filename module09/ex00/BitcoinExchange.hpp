@@ -5,6 +5,8 @@
 #include <iostream>
 #include <map>
 #include <fstream>
+#include <sstream>
+#include <string>
 
 struct Date {
 	unsigned int day;
@@ -22,6 +24,7 @@ class BitcoinExchange {
 	private:
 		void checkInput(const std::string &input) const;
 		void loadDatabase(const std::string &csv) const;
+		bool checkHeader(const std::string& line, std::string& delim) const;
 
 		std::map<Date, float> _data;
 };

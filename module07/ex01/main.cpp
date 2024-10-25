@@ -1,8 +1,7 @@
 #include "iter.hpp"
-#include <iostream>
 
-inline void printThing(int i) { std::cout << i << std::endl; }
-inline void printThing(std::string str) { std::cout << str << std::endl; }
+inline void printThing(int& i) { std::cout << i << std::endl; }
+inline void printThing(std::string& str) { std::cout << str << std::endl; }
 
 int main (void) {
 	std::string stringArray[]	= {"test1", "test2", "test3"};
