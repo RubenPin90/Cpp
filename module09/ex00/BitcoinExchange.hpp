@@ -7,11 +7,19 @@
 #include <fstream>
 #include <sstream>
 #include <string>
+#include <cstdlib>
+#include <utility>
 
 struct Date {
-	unsigned int day;
-	unsigned int month;
-	unsigned int year;
+	int day;
+	int month;
+	int year;
+
+	bool operator<(const Date& other) const {
+		if(year != other.year) { return year < other.year; }
+		if (month != other.month) { return month < other.month; }
+		return day < other.day;
+	}
 };
 
 class BitcoinExchange {
@@ -21,14 +29,19 @@ class BitcoinExchange {
 		BitcoinExchange(const BitcoinExchange& ref);
 		~BitcoinExchange();
 		BitcoinExchange& operator=(const BitcoinExchange& rhs);
+		const std::map<Date, float>& getdata() const;
+
 	private:
-		void checkInput(const std::string &input) const;
-		void loadDatabase(const std::string &csv) const;
+		void loadDatabase(const std::string &csv);
+		void loadInput(const std::string &input);
+		void open_wrapper(const std::string &file, std::ifstream& fd, std::string& delim);
 		bool checkHeader(const std::string& line, std::string& delim) const;
 
 		std::map<Date, float> _data;
 };
 
 typedef BitcoinExchange BitEx;
+std::ostream& operator<<(std::ostream& ost, const BitEx& rhs);
+
 
 #endif

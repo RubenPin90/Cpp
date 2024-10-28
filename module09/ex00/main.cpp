@@ -10,6 +10,7 @@ int main (int ac, char* av[]) {
 		if (ac == 2) {
 			std::cout << "Input: " << av[1] << " | Database: default" << std::endl;
 			BitcoinExchange BitEx(av[1]);
+			std::cout << BitEx;
 		}
 		else if (ac == 3) {
 			std::cout << "Input: " << av[1] << " | Database: " << av[2] << std::endl;
