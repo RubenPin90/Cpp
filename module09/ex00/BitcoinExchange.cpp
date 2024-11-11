@@ -8,8 +8,7 @@ BitEx::BitcoinExchange(const std::string &input) {
 }
 BitEx::BitcoinExchange(const std::string &input, const std::string &csv) {
 	loadDatabase(csv);
-	(void)input;
-	// loadFile(input);
+	loadInput(input);
 }
 BitEx::BitcoinExchange(const BitEx& ref) { *this = ref; }
 BitEx::~BitcoinExchange() {}
@@ -20,69 +19,8 @@ BitEx& BitEx::operator=(const BitEx& rhs) {
 	return *this;
 }
 
-const std::map<Date, float>& BitEx::getdata() const {
+const std::map<time_t, float>& BitEx::getdata() const {
 	return _data;
-}
-
-
-void BitEx::loadInput(const std::string& input) {
-	std::ifstream fd;
-	std::string line, delim;
-
-	open_wrapper(input, fd, delim);
-	while (std::getline(fd, line)) {
-
-	}
-}
-
-static size_t checkDelim(const std::string& line, const std::string& delim, const int& i) {
-	std::size_t tmp = line.find(delim);
-	if (tmp == std::string::npos) {
-		std::ostringstream ost;
-		ost << "Invalid delimitor at line " << i;
-		throw std::logic_error(ost.str());
-	}
-	return tmp;
-}
-
-void BitEx::loadDatabase(const std::string &csv) {
-	std::ifstream fd;
-	std::ostringstream ost;
-	std::string line, delim;
-	size_t len = csv.length();
-	if (len < SUFFIX || csv.compare(len - SUFFIX, SUFFIX, ".csv") != 0)
-		throw std::logic_error("Invalid data filename: Needs to be .csv");
-	open_wrapper(csv, fd, delim);
-
-	for (int i = 2; std::getline(fd, line); ++i) {
-		size_t tmp = checkDelim(line, delim, i);
-		checkDate(line.substr(0, tmp))
-		std::string dateStr = line.substr(0, tmp);
-		if (dateStr.length() != 10) {
-			ost << "Invalid date syntax at line " << i;
-			throw std::logic_error(ost.str());
-		}
-		std::istringstream date(dateStr);
-		Date now; 
-		char sep1, sep2;
-	
-		date >> now.year >> sep1 >> now.month >> sep2 >> now.day;
-		if (date.fail() || sep1 != '-' || sep2 != '-' || now.year < 0 || now.month < 1 || \
-						now.month > 12 || now.day < 1 || now.day > 31) {
-			ost << "Date is not correct at line: " << i;
-			throw std::logic_error(ost.str());
-		}
-
-		std::string rateStr = line.substr(tmp + 1);
-		std::istringstream rate(rateStr);
-		float f_value;
-		rate >> f_value;
-		if (!rate.eof() || rate.fail() ||  f_value < 0.0f) {
-			ost << "Invalid Exchange Rate at line: " << i;
-			throw std::logic_error(ost.str());
-		}
-		_data.insert(std::make_pair(now, f_value));
-	}
 }
 
 void BitEx::open_wrapper(const std::string &input, std::ifstream& fd, std::string& delim) {
@@ -109,35 +47,137 @@ static void	trim(std::string& str) {
 		str = str.substr(start, end - start + 1);
 }
 
-bool BitEx::checkHeader(const std::string& header, std::string& delim) const {
-	std::string head, tail;
-	std::size_t pos;
-	pos = header.find_first_of("|,");
-	if (pos != std::string::npos) {
-		delim = header[pos];
-		head = header.substr(0, pos);
-		tail = header.substr(pos + 1);
-		trim(head);
-		trim(tail);
-		if (head != "date" || !(tail == "value" || tail == "exchange_rate") || \
-												!(delim == "|" || delim == ","))
-			return false;
-	} else {
+static bool checkDelim(const std::string& line, std::size_t& tmp, const std::string& delim) {
+	tmp = line.find(delim);
+	return tmp == std::string::npos;
+}
+
+static int daysInMonth(const Date& now) {
+	switch(now.month) {
+		case 4: case 6: case 9: case 11:
+			return 30;
+		case 2:
+			return (now.year % 4 == 0 && (now.year % 100 != 0 || now.year % 400 == 0)) ? 29 : 28;
+		default:
+			return 31;
+	}
+}
+
+static bool checkDate(time_t& time, const std::string& line, const std::size_t pos) {
+	std::string dateStr = line.substr(0, pos);
+	trim(dateStr);
+	if (dateStr.length() != 10)
+		return false;
+	std::istringstream date(dateStr);
+	Date now;
+	char sep1, sep2;
+	date >> now.year >> sep1 >> now.month >> sep2 >> now.day;
+	if (date.fail() || sep1 != '-' || sep2 != '-' || now.year < 0 || now.month < 1 || \
+					now.month > 12 || now.day < 1 || now.day > daysInMonth(now)) {
 		return false;
 	}
+	static std::tm tmp;
+	tmp.tm_year = now.year - 1900;
+	tmp.tm_mon = now.month - 1;
+	tmp.tm_mday = now.day;
+	time = std::mktime(&tmp);
 	return true;
 }
 
+static bool checkValue(const std::string& line, const std::size_t& pos, \
+						const std::string& delim, float& value, bool range) {
+	std::string rateStr = line.substr(pos + delim.length());
+	std::istringstream rate(rateStr);
+	rate >> value;
+	if (!rate.eof() || rate.fail() ||  value < 0.0f || (range && (value > 1000.0f)))
+		return false;
+	return true;
+}
+
+bool BitEx::checkHeader(std::string& header, std::string& delim) const {
+	trim(header);
+	if(header == "date | value") {
+		delim = " | ";
+		return true;
+	}
+	else if (header == "date,exchange_rate") {
+		delim = ",";
+		return true;
+	}
+	return false;
+}
+
+void BitEx::loadInput(const std::string& input) {
+	time_t date;
+	float value;
+	std::ifstream fd;
+	std::string line, delim;
+	std::size_t pos;
+
+	open_wrapper(input, fd, delim);
+	for (int i = 2; std::getline(fd, line); ++i) {
+		if (checkDelim(line, pos, delim)) {
+			std::cerr << "Invalid delimitor at line " << i << std::endl;
+			continue;
+		}
+		if (!checkDate(date, line, pos)) {
+			std::cerr << "Invalid date at line " << i << std::endl;
+			continue;
+		}
+		if (!checkValue(line, pos, delim, value, true)) {
+			std::cerr << "Invalid value at line: " << i << std::endl;
+			continue;
+		}
+	}
+}
+
+void BitEx::loadDatabase(const std::string &csv) {
+	time_t date; 
+	float value;
+	std::ifstream fd;
+	std::ostringstream ost;
+	std::string line, delim;
+	std::size_t pos, len;
+	
+	len = csv.length();
+	if (len < SUFFIX || csv.compare(len - SUFFIX, SUFFIX, ".csv") != 0)
+		throw std::logic_error("Invalid data filename: Needs to be .csv");
+	open_wrapper(csv, fd, delim);
+
+	for (int i = 2; std::getline(fd, line); ++i) {
+		if (checkDelim(line, pos, delim)) {
+			ost << "Invalid delimitor at line " << i;
+			throw std::logic_error(ost.str());
+		}
+		if (!checkDate(date, line, pos)) {
+			ost << "Invalid date at line " << i;
+			throw std::logic_error(ost.str());
+		}
+		if (!checkValue(line, pos, delim, value, false)) {
+			ost << "Invalid Exchange Rate at line: " << i;
+			throw std::logic_error(ost.str());
+		}
+		std::tm* tm_date = std::localtime(&date);
+		std::cerr << tm_date->tm_year + 1900 << "/" << tm_date->tm_mday << std::endl;
+		_data[date]= value;
+		// _data.insert(std::make_pair(date, value));
+	}
+}
+
 std::ostream& operator<<(std::ostream& ost, const BitEx& rhs) {
-	int i = 0;
-	for (std::map<Date, float>::const_iterator it = rhs.getdata().begin(); it != rhs.getdata().end(); ++it) {
-		ost << ++i << " " << it->first.year << "-" << it->first.month << "-" << it->first.day;
-		ost << " " << it->second << std::endl;
+	int i = 1;
+	for (std::map<time_t, float>::const_iterator it = rhs.getdata().begin(); it != rhs.getdata().end(); ++it) {
+		std::tm* tm_date = std::localtime(&it->first);
+		ost << ++i << " " << tm_date->tm_year + 1900 << "-";
+		ost << std::setfill('0') << std::setw(2) << tm_date->tm_mon + 1 << "-";
+		ost << std::setfill('0') << std::setw(2) << tm_date->tm_mday;
+		if (static_cast<int>(it->second) == it->second)
+			ost << " " << static_cast<int>(it->second) << std::endl;
+		else
+			ost << " " << std::fixed << std::setprecision(2) << it->second << std::endl;
 	}
 	return ost;
 }
-
-
 
 // Another checkHeader implementation through stringstream:
 // bool BitEx::checkHeader(const std::string& header, std::string& delim) const {
@@ -164,3 +204,22 @@ std::ostream& operator<<(std::ostream& ost, const BitEx& rhs) {
 	// 	return true;
 	// }
 	// return false; }
+
+// 	bool BitEx::checkHeader(const std::string& header, std::string& delim) const {
+// 	std::string head, tail;
+// 	std::size_t pos;
+// 	pos = header.find_first_of("|,");
+// 	if (pos != std::string::npos) {
+// 		delim = header[pos];
+// 		head = header.substr(0, pos);
+// 		tail = header.substr(pos + 1);
+// 		trim(head);
+// 		trim(tail);
+// 		if (head != "date" || !(tail == "value" || tail == "exchange_rate") || 
+// 												!(delim == "|" || delim == ","))
+// 			return false;
+// 	} else {
+// 		return false;
+// 	}
+// 	return true;
+// }
