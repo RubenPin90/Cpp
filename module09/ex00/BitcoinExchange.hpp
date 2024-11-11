@@ -17,12 +17,6 @@ struct Date {
 	int day;
 	int month;
 	int year;
-
-	bool operator<(const Date& other) const {
-		if(year != other.year) { return year < other.year; }
-		if (month != other.month) { return month < other.month; }
-		return day < other.day;
-	}
 };
 
 class BitcoinExchange {
@@ -39,6 +33,7 @@ class BitcoinExchange {
 		void loadInput(const std::string &input);
 		void open_wrapper(const std::string &file, std::ifstream& fd, std::string& delim);
 		bool checkHeader(std::string& line, std::string& delim) const;
+		std::string convertDate(const time_t& date);
 
 		std::map<time_t, float> _data;
 };

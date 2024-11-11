@@ -7,6 +7,7 @@ BitEx::BitcoinExchange(const std::string &input) {
 	loadInput(input);
 }
 BitEx::BitcoinExchange(const std::string &input, const std::string &csv) {
+	std::cout << "Bitcoin Exchange Constructor with specific CSV called." << std::endl;
 	loadDatabase(csv);
 	loadInput(input);
 }
@@ -22,6 +23,7 @@ BitEx& BitEx::operator=(const BitEx& rhs) {
 const std::map<time_t, float>& BitEx::getdata() const {
 	return _data;
 }
+
 
 void BitEx::open_wrapper(const std::string &input, std::ifstream& fd, std::string& delim) {
 	std::string line;
@@ -117,16 +119,26 @@ void BitEx::loadInput(const std::string& input) {
 	open_wrapper(input, fd, delim);
 	for (int i = 2; std::getline(fd, line); ++i) {
 		if (checkDelim(line, pos, delim)) {
-			std::cerr << "Invalid delimitor at line " << i << std::endl;
+			std::cerr << "Error: Invalid delimitor at line: " << i << std::endl;
 			continue;
 		}
 		if (!checkDate(date, line, pos)) {
-			std::cerr << "Invalid date at line " << i << std::endl;
+			std::cerr << "Error: Invalid date at line: " << i << std::endl;
 			continue;
 		}
 		if (!checkValue(line, pos, delim, value, true)) {
-			std::cerr << "Invalid value at line: " << i << std::endl;
+			std::cerr << "Error: Invalid value at line: " << i << std::endl;
 			continue;
+		}
+		std::map<time_t, float>::const_iterator it = _data.lower_bound(date);
+		if (it->first == date) {
+			std::cout << std::fixed << std::setprecision(2) << "[ " << i << " ] " << convertDate(date) << " => " << value << " = " << value*it->second << std::endl;
+		} else if (it == _data.begin()) {
+			std::cerr << "No exchange rate found for date: " << convertDate(date) << " at line " << i << std::endl;
+			continue;
+		} else {
+			--it;
+			std::cout << std::fixed << std::setprecision(2) << "[ " << i << " ] " << convertDate(date) << " => " << value << " = " << value*it->second << std::endl;
 		}
 	}
 }
@@ -145,23 +157,33 @@ void BitEx::loadDatabase(const std::string &csv) {
 	open_wrapper(csv, fd, delim);
 
 	for (int i = 2; std::getline(fd, line); ++i) {
+		if (line.empty()) {
+			ost << "[" << csv << "-Error] " << "Empty line at line: " << i;
+			throw std::logic_error(ost.str());
+		}
 		if (checkDelim(line, pos, delim)) {
-			ost << "Invalid delimitor at line " << i;
+			ost << "[" << csv << "-Error] " << "Invalid delimitor at line: " << i;
 			throw std::logic_error(ost.str());
 		}
 		if (!checkDate(date, line, pos)) {
-			ost << "Invalid date at line " << i;
+			ost << "[" << csv << "-Error] " << "Invalid date at line: " << i;
 			throw std::logic_error(ost.str());
 		}
 		if (!checkValue(line, pos, delim, value, false)) {
-			ost << "Invalid Exchange Rate at line: " << i;
+			ost << "[" << csv << "-Error] " << "Invalid Exchange Rate at line: " << i;
 			throw std::logic_error(ost.str());
 		}
-		std::tm* tm_date = std::localtime(&date);
-		std::cerr << tm_date->tm_year + 1900 << "/" << tm_date->tm_mday << std::endl;
 		_data[date]= value;
-		// _data.insert(std::make_pair(date, value));
 	}
+}
+
+std::string BitEx::convertDate(const time_t& date) {
+	std::stringstream sst;
+	std::tm* tm_date = std::localtime(&date);
+	sst << tm_date->tm_year + 1900 << "-";
+	sst << std::setfill('0') << std::setw(2) << tm_date->tm_mon + 1 << "-";
+	sst << std::setfill('0') << std::setw(2) << tm_date->tm_mday;
+	return sst.str();	
 }
 
 std::ostream& operator<<(std::ostream& ost, const BitEx& rhs) {
