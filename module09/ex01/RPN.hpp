@@ -14,10 +14,11 @@ class RPN {
 		RPN(const RPN& ref);
 		~RPN();
 		RPN& operator=(const RPN& rhs);
-		void printStackData();
 		
 	private:
 		std::stack<long, std::vector<long> > _baseStack;
+		void printStackData();
+		bool isOperator(char c);
 };
 
 #endif
