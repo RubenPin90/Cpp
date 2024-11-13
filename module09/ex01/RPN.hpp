@@ -3,6 +3,7 @@
 #include <iostream>
 #include <stack>
 #include <vector>
+#include <limits>
 #include <sstream>
 
 #define FAIL 1
@@ -14,9 +15,11 @@ class RPN {
 		RPN(const RPN& ref);
 		~RPN();
 		RPN& operator=(const RPN& rhs);
+		long getResult();
 		
 	private:
 		std::stack<long, std::vector<long> > _baseStack;
+		int _neg_num;
 		void printStackData();
 		bool isOperator(char c);
 };
