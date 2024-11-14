@@ -1,4 +1,5 @@
-obj/PmergeMe.o: PmergeMe.cpp PmergeMe.hpp \
+obj/fordJohnsonSort.o: fordJohnsonSort.cpp fordJohnsonSort.hpp \
+  PmergeMe.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/iostream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/x86_64-linux-gnu/c++/11/bits/c++config.h \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -146,5 +147,4 @@ obj/PmergeMe.o: PmergeMe.cpp PmergeMe.hpp \
   rp_tools.hpp \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/sstream \
   /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/bits/sstream.tcc \
-  /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/limits \
-  fordJohnsonSort.hpp
+  /usr/bin/../lib/gcc/x86_64-linux-gnu/11/../../../../include/c++/11/limits

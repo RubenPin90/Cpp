@@ -11,37 +11,14 @@ PmergeMe::PmergeMe() : _ac(0) {}
 PmergeMe::PmergeMe(const PmergeMe& ref) : _ac(ref._ac) {}
 PmergeMe& PmergeMe::operator=(const PmergeMe& ) { return *this; }
 
-double PmergeMe::sortList() {
-	clock_t start = clock();
-	for (int i = 0; i < _ac; ++i)
-		_list.push_back(std::atoi(_av[i]));
-	clock_t end = clock();
-	std::cout << "Before: ";
-	rp_tools::printContainer(_list);
-
-	std::cout << "After: ";
-	rp_tools::printContainer(_list);
-	
-	double time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-	rp_tools::printResults(_ac, "std::list", time_used);
-	return time_used;
+double PmergeMe::sortList(bool check) {
+	double res = sortContainer(_list, "list", check);
+	return (res);
 }
 
-double PmergeMe::sortDeque() {
-	clock_t start = clock();
-	for (int i = 0; i < _ac; ++i)
-		_deq.push_back(std::atoi(_av[i]));
-	clock_t end = clock();
-	std::cout << "Before: ";
-	rp_tools::printContainer(_deq);
-
-	std::cout << "After: ";
-	rp_tools::printContainer(_deq);
-	
-	double time_used = ((double) (end - start)) / CLOCKS_PER_SEC;
-	rp_tools::printResults(_ac, "std::list", time_used);
-	return time_used;
-
+double PmergeMe::sortDeque(bool check) {
+	double res = sortContainer(_deq, "deque", check);
+	return (res);
 }
 
 

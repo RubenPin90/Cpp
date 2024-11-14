@@ -7,7 +7,7 @@
 
 namespace rp_tools {
 	bool validInput(const int ac, char* av[]);
-	void printResults(const int count, const std::string& type, const double time);
+	void printResults(const int count, const std::string& type, const double convTime, const double sortTime);
 
 	template<typename T>
 	void printContainer(const T& cont) {
