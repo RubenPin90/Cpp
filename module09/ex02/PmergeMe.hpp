@@ -36,8 +36,9 @@ double PmergeMe::sortContainer(Container& cont, const std::string& type, bool ch
 
 	std::cout << "_________ " << type << "_________ \n" << std::endl;
 	clock_t start = clock();
-	for (int i = 0; i < _ac; ++i)
+	for (int i = 1; i < _ac; ++i) {
 		cont.push_back(std::atoi(_av[i]));
+	}
 	clock_t end = clock();
 	timeToConvert = ((double) (end - start)) / CLOCKS_PER_SEC;
 	std::cout << "Before: ";
