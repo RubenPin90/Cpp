@@ -124,4 +124,7 @@ obj/fordJohnsonSort.o: fordJohnsonSort.cpp /usr/include/stdc-predef.h \
  /usr/include/alloca.h /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/11/bits/std_abs.h rp_tools.hpp \
  /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
- /usr/include/c++/11/limits
+ /usr/include/c++/11/limits /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/bits/stl_bvector.h \
+ /usr/include/c++/11/bits/vector.tcc

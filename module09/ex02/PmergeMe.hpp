@@ -9,6 +9,7 @@
 #define FAIL 1
 #define SUCCESS 0
 
+
 class PmergeMe {
 	public:
 		PmergeMe(int ac, char* av[]);
@@ -31,7 +32,7 @@ class PmergeMe {
 };
 
 template<typename Container>
-double PmergeMe::sortContainer(Container& cont, const std::string& type, bool check) {
+double PmergeMe::sortContainer(Container& cont, const std::string& type, bool test_mode) {
 	double timeToSort, timeToConvert;
 
 	std::cout << "_________ " << type << "_________ \n" << std::endl;
@@ -41,18 +42,19 @@ double PmergeMe::sortContainer(Container& cont, const std::string& type, bool ch
 	}
 	clock_t end = clock();
 	timeToConvert = ((double) (end - start)) / CLOCKS_PER_SEC;
-	std::cout << "Before: ";
-	rp_tools::printContainer(cont);
+	Container tmp = cont;
 
 	start = clock();
-	size_t comp = fordJohnsonSort(cont, check);
-	(void)comp;
+	size_t comp = fordJohnsonSort(cont, test_mode);
 	end = clock();
 	timeToSort = ((double) (end - start)) / CLOCKS_PER_SEC;
 
+	std::cout << "\nBefore: ";
+	rp_tools::printContainer(tmp);
 	std::cout << "After: ";
 	rp_tools::printContainer(cont);
-	rp_tools::printResults(_ac, type, timeToConvert, timeToSort);
+	rp_tools::prnt("\nComparisons: ", comp, test_mode);
+	rp_tools::printResults(_ac - 1, type, timeToConvert, timeToSort);
 	return (timeToConvert + timeToSort);
 }
 

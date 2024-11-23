@@ -15,9 +15,9 @@ int FilterWrongInput(int ac, char* av[]) {
 int main(int ac, char *av[]) {
 	if (FilterWrongInput(ac, av))
 		return FAIL;
-	bool describe = false;
+	bool test_mode = false;
 	if (!std::strcmp(av[1], "-t")) {
-		describe = true;
+		 test_mode = true;
 		for (int i = 1; i < ac - 1; ++i) {
 			av[i] = av[i + 1];
 		}
@@ -25,8 +25,8 @@ int main(int ac, char *av[]) {
 	}
 	try {
 		PmergeMe purgeMe(ac, av);
-		purgeMe.sortList(describe);
-		purgeMe.sortDeque(describe);
+		purgeMe.sortList(test_mode);
+		purgeMe.sortDeque(test_mode);
 	} catch(std::exception &e) {
 		std::cerr << "ERROR: " << e.what() << std::endl;
 		return FAIL;
