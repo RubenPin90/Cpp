@@ -1,4 +1,5 @@
-obj/main.o: main.cpp /usr/include/stdc-predef.h PmergeMe.hpp \
+obj/fordJohnsonSort_deque.o: fordJohnsonSort_deque.cpp \
+ /usr/include/stdc-predef.h fordJohnsonSort.hpp PmergeMe.hpp \
  /usr/include/c++/11/iostream \
  /usr/include/x86_64-linux-gnu/c++/11/bits/c++config.h \
  /usr/include/x86_64-linux-gnu/c++/11/bits/os_defines.h \
@@ -124,8 +125,7 @@ obj/main.o: main.cpp /usr/include/stdc-predef.h PmergeMe.hpp \
  /usr/include/alloca.h /usr/include/x86_64-linux-gnu/bits/stdlib-float.h \
  /usr/include/c++/11/bits/std_abs.h rp_tools.hpp \
  /usr/include/c++/11/sstream /usr/include/c++/11/bits/sstream.tcc \
- /usr/include/c++/11/limits fordJohnsonSort.hpp \
- /usr/include/c++/11/vector /usr/include/c++/11/bits/stl_vector.h \
+ /usr/include/c++/11/limits /usr/include/c++/11/vector \
+ /usr/include/c++/11/bits/stl_vector.h \
  /usr/include/c++/11/bits/stl_bvector.h \
- /usr/include/c++/11/bits/vector.tcc /usr/include/c++/11/cstring \
- /usr/include/string.h /usr/include/strings.h
+ /usr/include/c++/11/bits/vector.tcc

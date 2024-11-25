@@ -6,7 +6,7 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/18 15:23:09 by rpinchas          #+#    #+#              #
-#    Updated: 2024/11/14 18:40:20 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/11/23 15:43:43 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,8 @@ FLAGS := -Wall -Werror -Wextra -MD -std=c++98 -pedantic
 SRC :=	main.cpp \
 		PmergeMe.cpp \
 		rp_tools.cpp \
-		fordJohnsonSort.cpp
+		fordJohnsonSort_deque.cpp \
+		fordJohnsonSort_list.cpp
 OBJ_DIR := ./obj
 OBJ := $(SRC:%.cpp=$(OBJ_DIR)/%.o)
 

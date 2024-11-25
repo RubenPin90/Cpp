@@ -32,3 +32,13 @@ void rp_tools::printResults(const int count, const std::string& type, const doub
 	std::cout << "Time to process a range of " << count << " elements with std::" << type;
 	std::cout << ": " << std::fixed << convTime << " seconds.\n" << std::endl;
 }
+
+
+// J(n) = J(n-1) + 2 * J(n-2)
+size_t rp_tools::gen_jacobsthal(size_t num) {
+	if(num == 0)
+		return 0;
+	if(num == 1)
+		return 1;
+	return gen_jacobsthal(num - 1) + 2 * gen_jacobsthal(num - 2);
+}
