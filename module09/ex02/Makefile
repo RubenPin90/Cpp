@@ -6,14 +6,14 @@
 #    By: rpinchas <rpinchas@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/09/18 15:23:09 by rpinchas          #+#    #+#              #
-#    Updated: 2024/11/23 15:43:43 by rpinchas         ###   ########.fr        #
+#    Updated: 2024/12/06 16:07:05 by rpinchas         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME := PmergeMe
 
 COMP := c++
-FLAGS := -Wall -Werror -Wextra -MD -std=c++98 -pedantic 
+FLAGS := -Wall -Werror -Wextra -std=c++98 -pedantic 
 
 SRC :=	main.cpp \
 		PmergeMe.cpp \

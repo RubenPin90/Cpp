@@ -7,6 +7,7 @@ typedef struct s_data {
 	std::size_t c_size;
 	std::size_t block_size;
 	std::size_t blocks;
+	std::size_t chunks;
 	bool test_mode;
 } t_data;
 

@@ -53,6 +53,7 @@ double PmergeMe::sortContainer(Container& cont, const std::string& type, bool te
 	rp_tools::printContainer(tmp);
 	std::cout << "After: ";
 	rp_tools::printContainer(cont);
+	rp_tools::checkIfSorted(cont);
 	rp_tools::prnt("\nComparisons: ", comp, test_mode);
 	rp_tools::printResults(_ac - 1, type, timeToConvert, timeToSort);
 	return (timeToConvert + timeToSort);

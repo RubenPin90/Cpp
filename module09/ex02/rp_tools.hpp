@@ -4,6 +4,8 @@
 #include <iostream>
 #include <sstream>
 #include <limits>
+#include <list>
+#include <deque>
 #define RED "\033[31m"
 #define GREY "\033[2m"
 #define GREEN "\033[32m"
@@ -15,6 +17,23 @@ namespace rp_tools {
 	bool validInput(const int ac, char* av[]);
 	void printResults(const int count, const std::string& type, const double convTime, const double sortTime);
 	std::size_t gen_jacobsthal(std::size_t num);
+
+	template<typename T>
+	void checkIfSorted(const T& cont) {
+		typename T::const_iterator tmp = cont.begin();
+		bool sorted = true;
+
+		for (typename T::const_iterator it = cont.begin(); it != cont.end(); ++it) {
+			if(it != cont.begin() && *tmp > *it)
+				sorted = false;
+			tmp = it;
+		}
+		std::cout << "Sequence is sorted: ";
+		if (sorted)
+			std::cout << GREEN << "\u2714" << RESET << std::endl;
+		else
+			std::cout << RED << "\u2718" << RESET << std::endl;
+	}
 
 	template<typename T>
 	void printContainer(const T& cont) {

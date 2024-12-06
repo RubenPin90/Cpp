@@ -2,7 +2,6 @@
 
 typedef std::deque<unsigned int>::iterator deqIt;
 
-
 void prnt_cont(const std::string& description, const int& lvl, std::deque<unsigned int>& cont, const bool test_mode, const std::size_t& c_size) {
 	if (test_mode) {
 		std::ostringstream ost;
@@ -41,8 +40,6 @@ deqIt binary_find(std::deque<unsigned int>& a_row,  const unsigned int val, cons
 	return first; 
 }
 
-
-
 //Implementation of Ford-Johnson Algorithm with std::deque.
 //Container is sorted by (it, it + n), where n is the current level and size of the blocks being sorted.
 void fJ_impl(std::deque<unsigned int>& deq, const std::size_t size, std::size_t& comp, bool test_mode, std::size_t lvl) {
@@ -63,7 +60,7 @@ void fJ_impl(std::deque<unsigned int>& deq, const std::size_t size, std::size_t&
 	deqIt newend = deq.end();
 	if (odd) 
 		newend = deq.end() - odd;
-	//Comparing Chunks and swaping blocks accordingly
+	//1.Part: Merge-Sort - Recursive comparing of chunks and swaping blocks accordingly
 	for (deqIt it = deq.begin(); it != newend; it += block_size) {
 		if (*it < *(it + c_size)) {
 			rp_tools::prnt("Swaping ", *it, test_mode);
@@ -74,7 +71,11 @@ void fJ_impl(std::deque<unsigned int>& deq, const std::size_t size, std::size_t&
 	prnt_cont("My deq after swap at ", lvl, deq, test_mode, c_size);
 
 	fJ_impl(deq, deq.size(), comp, test_mode, lvl + 1);
+	rp_tools::prnt("\nBack at LEVEL: ", lvl, test_mode);
+	prnt_cont("List now at ", lvl, deq, test_mode, c_size);
 
+	//2.Part: Binary-Insertion
+	//Creating a (larger number row) and b (smaller number row)
 	std::deque<unsigned int> a_row, b_row;
 	a_row.insert(a_row.end(), deq.begin(), deq.begin() + c_size);
 	a_row.insert(a_row.begin(), deq.begin() + c_size, deq.begin() + block_size);
@@ -90,9 +91,12 @@ void fJ_impl(std::deque<unsigned int>& deq, const std::size_t size, std::size_t&
 	if (odd)
 		b_row.insert(b_row.end(), newend, deq.end());
 
+	rp_tools::prnt("compares: ", comp, test_mode);
 	prnt_cont("a_row", lvl, a_row, test_mode, c_size);
 	prnt_cont("b_row", lvl, b_row, test_mode, c_size);
-	
+
+	//After sorting of a's and b's, now comes the binary insertion of b in a 
+	//b's are sorted by Jacobsthal sequence and by comparing with 2^n - 1 of a. 
 	deqIt b_it = b_row.begin();
 	std::size_t n = 2;
 	while (b_it != b_row.end()) {
@@ -108,7 +112,6 @@ void fJ_impl(std::deque<unsigned int>& deq, const std::size_t size, std::size_t&
 
 		for (int i = jt_steps; i != 0; i--) {
 			deqIt tmp = b_it + (i - 1) * c_size;
-			std::cout << "Pointer at " << *tmp << std::endl;
 			deqIt ins_pos = binary_find(a_row, *tmp, c_size, n, comp);
 			a_row.insert(ins_pos, tmp, tmp + c_size);
 		}

@@ -12,8 +12,15 @@ void prnt_cont(const std::string& description, const int& lvl, std::list<unsigne
 	}
 }
 
+std::size_t list_size(const std::list<unsigned int>& lst) {
+	std::size_t i = 0;
+	for(std::list<unsigned int>::const_iterator it = lst.begin(); it != lst.end(); ++it)
+		++i;
+	return i;
+}
+
 listIt binary_find(std::list<unsigned int>& a_row,  const unsigned int val, const t_data& info, const std::size_t& n, std::size_t& comp) {
-	std::size_t range = std::min(static_cast<std::size_t>((1 << n) - 1), a_row.size() / info.c_size);
+	std::size_t range = std::min(static_cast<std::size_t>((1 << n) - 1), list_size(a_row) / info.c_size);
 	listIt first = a_row.begin();
 	listIt last = first;
 	std::advance(last, info.c_size * range);
@@ -29,7 +36,6 @@ listIt binary_find(std::list<unsigned int>& a_row,  const unsigned int val, cons
             break;
 		std::advance(it, step * info.c_size);
 
-		std::cout << *it << "<" << val << "\n";
 		if (*it < val) {
 			if (static_cast<std::size_t>(std::distance(it, last)) < info.c_size)
                 break;
@@ -66,23 +72,22 @@ void list_swap(std::list<unsigned int>& lst, const t_data& info, std::size_t& co
 	}
 }
 
+listIt next_iter(listIt lst, const std::size_t& steps) {
+	std::advance(lst, steps);
+	return lst;
+}
+
 void sort_lns(std::list<unsigned int>& lst, std::list<unsigned int>& a, std::list<unsigned int>& b, const t_data& info) {
 	bool alternate = true;
 	std::list<unsigned int> tmp;
 	listIt it = lst.begin();
-	// std::size_t chunks = lst.size() / info.c_size;
-	// std::cout << "blocks: " << info.blocks << "\n";
-	// std::cout << "c_size: " << info.c_size << "\n";
-	for (std::size_t i = 0; i <= info.blocks; ++i) {
-		listIt next = it;
-		std::cout << "next: " << *next << "\n";
-		std::advance(next, info.c_size);
+
+	for (std::size_t i = 0; i < info.blocks * 2; ++i) {
+		listIt next = next_iter(it, info.c_size);
 		if(alternate) {
 			a.splice(a.end(), lst, it, next);
-			std::cout << "a\n";
 		} else {
 			b.splice(b.end(), lst, it, next);
-			std::cout << "b\n";
 		}
 		alternate = !alternate;
 		it = next;
@@ -92,10 +97,6 @@ void sort_lns(std::list<unsigned int>& lst, std::list<unsigned int>& a, std::lis
 	}
 }
 
-listIt next_iter(listIt lst, const std::size_t& steps) {
-	std::advance(lst, steps);
-	return lst;
-}
 
 //Implementation of Ford-Johnson Algorithm with std::list.
 //Container is sorted by (it, it + n), where n is the current level and size of the blocks being sorted.
@@ -106,6 +107,7 @@ void fJ_impl(std::list<unsigned int>& lst, const std::size_t size, std::size_t& 
 	info.c_size = 1 << lvl;
 	info.block_size = info.c_size * 2;
 	info.blocks = size / info.block_size;
+	info.chunks = size / info.c_size;
 	info.test_mode = check;	
 
 	rp_tools::prnt("\nLEVEL: ", lvl, info.test_mode);
@@ -115,25 +117,30 @@ void fJ_impl(std::list<unsigned int>& lst, const std::size_t size, std::size_t& 
 		rp_tools::prnt("Last level detected: ", "Exiting", info.test_mode);
 		return;
 	}
+	//1.Part: Merge-Sort - Recursive comparing of chunks and swaping blocks accordingly
 	std::size_t odd = size % info.block_size;
 	listIt newend = lst.end();
 	if (odd) {
-		listIt tmp = lst.begin();
-		std::advance(tmp, size - odd);
+		listIt tmp = next_iter(lst.begin(), size - odd);
 		newend = tmp;
 	}
 	list_swap(lst, info, comp);
 	prnt_cont("My list after swap at", lvl, lst, info.test_mode, info.c_size);
 
 	fJ_impl(lst, lst.size(), comp, info.test_mode, lvl + 1);
+	rp_tools::prnt("\nBack at LEVEL: ", lvl, info.test_mode);
+	prnt_cont("List now at ", lvl, lst, info.test_mode, info.c_size);
 
+	//2.Part: Binary-Insertion
+	//Creating a (larger number row) and b (smaller number row)
 	std::list<unsigned int> a_row, b_row;
 	sort_lns(lst, a_row, b_row, info);
 
-	listIt next = b_row.begin();
-	std::advance(next, info.c_size);
+	listIt next = next_iter(b_row.begin(), info.c_size);
 	b_row.splice(a_row.begin(), b_row, b_row.begin(), next);
 
+	
+	rp_tools::prnt("compares: ", comp, info.test_mode);
 	prnt_cont("a_row", lvl, a_row, info.test_mode, info.c_size);
 	prnt_cont("b_row", lvl, b_row, info.test_mode, info.c_size);
 
@@ -154,12 +161,7 @@ void fJ_impl(std::list<unsigned int>& lst, const std::size_t size, std::size_t& 
 			listIt tmp = b_it;
 			std::advance(tmp, (i - 1) * info.c_size);
 			listIt ins_pos = binary_find(a_row, *tmp, info, n, comp);
-			std::cout << "ins_pos: " << *ins_pos << std::endl;
-			listIt next_tmp = tmp;
-			std::advance(next_tmp, info.c_size);
-			a_row.splice(ins_pos, b_row, tmp, next_tmp);
-			// a_row.splice(ins_pos, b_row, tmp, next_iter(tmp, info.c_size));
-			prnt_cont("New list at", lvl, lst, info.test_mode, info.c_size);
+			a_row.splice(ins_pos, b_row, tmp, next_iter(tmp, info.c_size));
 			b_it = b_row.begin();
 		}
 		n++;
