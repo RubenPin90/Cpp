@@ -31,8 +31,8 @@ class BitcoinExchange {
 	private:
 		void loadDatabase(const std::string &csv);
 		void loadInput(const std::string &input);
-		void open_wrapper(const std::string &file, std::ifstream& fd, std::string& delim);
-		bool checkHeader(std::string& line, std::string& delim) const;
+		void open_wrapper(const std::string &file, std::ifstream& fd, std::string& delim, bool iscsv);
+		bool checkHeader(std::string& line, std::string& delim, bool iscsv) const;
 		std::string convertDate(const time_t& date);
 
 		std::map<time_t, float> _data;

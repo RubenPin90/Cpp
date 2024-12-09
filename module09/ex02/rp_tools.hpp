@@ -15,7 +15,7 @@
 
 namespace rp_tools {
 	bool validInput(const int ac, char* av[]);
-	void printResults(const int count, const std::string& type, const double convTime, const double sortTime);
+	void printResult(const int count, const std::string& type, const double sortTime);
 	std::size_t gen_jacobsthal(std::size_t num);
 
 	template<typename T>

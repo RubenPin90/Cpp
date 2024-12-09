@@ -25,17 +25,14 @@ bool rp_tools::validInput(const int ac, char* av[]) {
 	return true;
 }
 
-void rp_tools::printResults(const int count, const std::string& type, const double convTime, const double sortTime) {
-	
-	std::cout << "\nTime to convert argv data to std::" << type << ": "; 
-	std::cout << std::fixed << sortTime << " seconds." << std::endl;
+void rp_tools::printResult(const int count, const std::string& type, const double sortTime) {
 	std::cout << "Time to process a range of " << count << " elements with std::" << type;
-	std::cout << ": " << std::fixed << convTime << " seconds.\n" << std::endl;
+	std::cout << ": " << std::fixed << sortTime << " seconds.\n" << std::endl;
 }
 
 
 // J(n) = J(n-1) + 2 * J(n-2)
-size_t rp_tools::gen_jacobsthal(size_t num) {
+std::size_t rp_tools::gen_jacobsthal(std::size_t num) {
 	if(num == 0)
 		return 0;
 	if(num == 1)

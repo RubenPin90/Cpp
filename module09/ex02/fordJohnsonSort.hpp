@@ -12,8 +12,8 @@ typedef struct s_data {
 } t_data;
 
 
-size_t fordJohnsonSort(std::deque<unsigned int>& deq, bool check);
-size_t fordJohnsonSort(std::list<unsigned int>& list, bool check);
+std::size_t fordJohnsonSort(std::deque<unsigned int>& deq, bool check);
+std::size_t fordJohnsonSort(std::list<unsigned int>& list, bool check);
 
 
 #endif

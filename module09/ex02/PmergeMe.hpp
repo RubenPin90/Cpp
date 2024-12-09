@@ -33,20 +33,17 @@ class PmergeMe {
 
 template<typename Container>
 double PmergeMe::sortContainer(Container& cont, const std::string& type, bool test_mode) {
-	double timeToSort, timeToConvert;
+	double timeToSort;
 
 	std::cout << "_________ " << type << "_________ \n" << std::endl;
-	clock_t start = clock();
 	for (int i = 1; i < _ac; ++i) {
 		cont.push_back(std::atoi(_av[i]));
 	}
-	clock_t end = clock();
-	timeToConvert = ((double) (end - start)) / CLOCKS_PER_SEC;
 	Container tmp = cont;
 
-	start = clock();
-	size_t comp = fordJohnsonSort(cont, test_mode);
-	end = clock();
+	clock_t start = clock();
+	std::size_t comp = fordJohnsonSort(cont, test_mode);
+	clock_t end = clock();
 	timeToSort = ((double) (end - start)) / CLOCKS_PER_SEC;
 
 	std::cout << "\nBefore: ";
@@ -54,9 +51,9 @@ double PmergeMe::sortContainer(Container& cont, const std::string& type, bool te
 	std::cout << "After: ";
 	rp_tools::printContainer(cont);
 	rp_tools::checkIfSorted(cont);
-	rp_tools::prnt("\nComparisons: ", comp, test_mode);
-	rp_tools::printResults(_ac - 1, type, timeToConvert, timeToSort);
-	return (timeToConvert + timeToSort);
+	rp_tools::prnt("\nComparisons: ", comp, true);
+	rp_tools::printResult(_ac - 1, type, timeToSort);
+	return (timeToSort);
 }
 
 

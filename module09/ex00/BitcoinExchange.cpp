@@ -25,7 +25,7 @@ const std::map<time_t, float>& BitEx::getdata() const {
 }
 
 
-void BitEx::open_wrapper(const std::string &input, std::ifstream& fd, std::string& delim) {
+void BitEx::open_wrapper(const std::string &input, std::ifstream& fd, std::string& delim, bool iscsv) {
 	std::string line;
 	std::ostringstream ost;
 
@@ -35,8 +35,8 @@ void BitEx::open_wrapper(const std::string &input, std::ifstream& fd, std::strin
 		throw std::runtime_error(ost.str());
 	}
 	std::getline(fd,line);
-	if (!checkHeader(line, delim)) {
-		ost << "Invalid file header: " << line;
+	if (!checkHeader(line, delim, iscsv)) {
+		ost << "Invalid file header: " << "\' " << line << " \' " << "in " << input;
 		throw std::logic_error(ost.str());
 	}
 }
@@ -51,6 +51,8 @@ static void	trim(std::string& str) {
 
 static bool checkDelim(const std::string& line, std::size_t& tmp, const std::string& delim) {
 	tmp = line.find(delim);
+	if (tmp != std::string::npos && (tmp != 10 || line[tmp + delim.length()] == ' '))
+		tmp = std::string::npos;
 	return tmp == std::string::npos;
 }
 
@@ -96,13 +98,12 @@ static bool checkValue(const std::string& line, const std::size_t& pos, \
 	return true;
 }
 
-bool BitEx::checkHeader(std::string& header, std::string& delim) const {
-	trim(header);
-	if(header == "date | value") {
+bool BitEx::checkHeader(std::string& header, std::string& delim, bool iscsv) const {
+	if(header == "date | value" && iscsv == false) {
 		delim = " | ";
 		return true;
 	}
-	else if (header == "date,exchange_rate") {
+	else if (header == "date,exchange_rate" && iscsv == true) {
 		delim = ",";
 		return true;
 	}
@@ -116,10 +117,12 @@ void BitEx::loadInput(const std::string& input) {
 	std::string line, delim;
 	std::size_t pos;
 
-	open_wrapper(input, fd, delim);
+	open_wrapper(input, fd, delim, false);
 	for (int i = 2; std::getline(fd, line); ++i) {
+		if (line.empty())
+			continue;
 		if (checkDelim(line, pos, delim)) {
-			std::cerr << "Error: Invalid delimitor at line: " << i << std::endl;
+			std::cerr << "Error: Invalid input at line: " << i << std::endl;
 			continue;
 		}
 		if (!checkDate(date, line, pos)) {
@@ -154,7 +157,7 @@ void BitEx::loadDatabase(const std::string &csv) {
 	len = csv.length();
 	if (len < SUFFIX || csv.compare(len - SUFFIX, SUFFIX, ".csv") != 0)
 		throw std::logic_error("Invalid data filename: Needs to be .csv");
-	open_wrapper(csv, fd, delim);
+	open_wrapper(csv, fd, delim, true);
 
 	for (int i = 2; std::getline(fd, line); ++i) {
 		if (line.empty()) {

@@ -3,7 +3,7 @@
 typedef std::list<unsigned int>::iterator listIt;
 
 
-void prnt_cont(const std::string& description, const int& lvl, std::list<unsigned int>& cont, const bool test_mode, const std::size_t& c_size) {
+static void prnt_cont(const std::string& description, const int& lvl, std::list<unsigned int>& cont, const bool test_mode, const std::size_t& c_size) {
 	if (test_mode) {
 		std::ostringstream ost;
 		ost << "\n" << description << " lvl " << lvl << ": ";
@@ -12,14 +12,14 @@ void prnt_cont(const std::string& description, const int& lvl, std::list<unsigne
 	}
 }
 
-std::size_t list_size(const std::list<unsigned int>& lst) {
+static std::size_t list_size(const std::list<unsigned int>& lst) {
 	std::size_t i = 0;
 	for(std::list<unsigned int>::const_iterator it = lst.begin(); it != lst.end(); ++it)
 		++i;
 	return i;
 }
 
-listIt binary_find(std::list<unsigned int>& a_row,  const unsigned int val, const t_data& info, const std::size_t& n, std::size_t& comp) {
+static listIt binary_find(std::list<unsigned int>& a_row,  const unsigned int val, const t_data& info, const std::size_t& n, std::size_t& comp) {
 	std::size_t range = std::min(static_cast<std::size_t>((1 << n) - 1), list_size(a_row) / info.c_size);
 	listIt first = a_row.begin();
 	listIt last = first;
@@ -49,7 +49,7 @@ listIt binary_find(std::list<unsigned int>& a_row,  const unsigned int val, cons
 	return first; 
 }
 
-void list_swap(std::list<unsigned int>& lst, const t_data& info, std::size_t& comp) {
+static void list_swap(std::list<unsigned int>& lst, const t_data& info, std::size_t& comp) {
 	listIt lsc_begin = lst.begin();
 	listIt lsc_end = lsc_begin;
 	std::advance(lsc_end, info.c_size);
@@ -72,12 +72,12 @@ void list_swap(std::list<unsigned int>& lst, const t_data& info, std::size_t& co
 	}
 }
 
-listIt next_iter(listIt lst, const std::size_t& steps) {
+static listIt next_iter(listIt lst, const std::size_t& steps) {
 	std::advance(lst, steps);
 	return lst;
 }
 
-void sort_lns(std::list<unsigned int>& lst, std::list<unsigned int>& a, std::list<unsigned int>& b, const t_data& info) {
+static void sort_lns(std::list<unsigned int>& lst, std::list<unsigned int>& a, std::list<unsigned int>& b, const t_data& info) {
 	bool alternate = true;
 	std::list<unsigned int> tmp;
 	listIt it = lst.begin();
@@ -100,7 +100,7 @@ void sort_lns(std::list<unsigned int>& lst, std::list<unsigned int>& a, std::lis
 
 //Implementation of Ford-Johnson Algorithm with std::list.
 //Container is sorted by (it, it + n), where n is the current level and size of the blocks being sorted.
-void fJ_impl(std::list<unsigned int>& lst, const std::size_t size, std::size_t& comp, bool check, std::size_t lvl) {
+static void fJ_impl(std::list<unsigned int>& lst, const std::size_t size, std::size_t& comp, bool check, std::size_t lvl) {
 	// left bitwise shift of 1 by n, equivalent to 2^n. 
 	// block_size is increasing in that range by each level.
 	t_data info;
